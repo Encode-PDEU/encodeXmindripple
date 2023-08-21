@@ -13,7 +13,8 @@ module.exports = {
           },
       },
       fontFamily:{
-        'oswald':['Oswald', 'sans-serif'],
+        'oswald':['var(--font-oswald)'],
+        'roboto':['var(--font-roboto)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
