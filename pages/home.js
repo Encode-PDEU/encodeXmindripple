@@ -19,9 +19,9 @@ const Home = () => {
     <div className="flex h-screen flex-col justify-center items-center bg-matrixBlack space-y-8 font-oswald">
       <ReactMatrixAnimation />
       <div className="flex flex-row items-center flex-wrap gap-x-4 justify-center"> {/* Add flex-wrap and justify-center for mobile responsiveness */}
-        <img src="/images/mindripple_logo.png" alt="MindRipple Logo" className="h-[150px] w-[181px]"/>
-        <img src="/images/X.png" alt="x" className="h-[80px] w-[44px]"/>
-        <img src="/images/Encode_Logo.png" alt="Encode Logo" className="h-[150px] w-[150px]" />
+        <img src="/Images/mindripple_logo.png" alt="MindRipple Logo" className="h-[150px] w-[181px]"/>
+        <img src="/Images/X.png" alt="x" className="h-[80px] w-[44px]"/>
+        <img src="/Images/Encode_Logo.png" alt="Encode Logo" className="h-[150px] w-[150px]" />
       </div>
       <div className="flex flex-row font-semibold text-3xl sm:text-7xl"> {/* Use different font size for mobile and larger screens */}
         <p className="text-green-500">Surf</p>

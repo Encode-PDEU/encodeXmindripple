@@ -32,10 +32,10 @@ const Login = () => {
             <input className="border rounded-lg w-full py-2 px-3 text-gray-500 bg-opacity-0 bg-black p-4 mb-5 mt-1 " id="password" type="password" placeholder="Enter Password" required></input>
             <div className="flex flex-col md:flex-row items-center justify-between">
               <p className="text-white text-2xl font-normal" type="button">
-                Don't have an account?
+                Do not have an account?
               </p>
               
-                <a href="/signup" className="inline-block align-baseline font-normal text-2xl"> Sign up </a>
+                <Link href="/signup" className="inline-block align-baseline font-normal text-2xl"> Sign up </Link>
              
             </div>
             <div className="flex justify-center mt-4">
