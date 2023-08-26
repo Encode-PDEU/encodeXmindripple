@@ -14,5 +14,5 @@ const { data, error } = await supabase.auth.signInWithPassword({
   }
   return res.status(200).json(data)
   
-    }
+  }
 }
