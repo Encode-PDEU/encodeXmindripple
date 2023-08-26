@@ -10,6 +10,7 @@ module.exports = {
       colors:{
           custom:{
               '161616': '#161616',
+              '1E1E1E': '#1E1E1E',
           },
       },
       fontFamily:{

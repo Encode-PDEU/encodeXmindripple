@@ -12,7 +12,7 @@ const Adminlogin = () => {
       </div>
       <div className="md:w-[50%] bg-custom-161616">
         <div className="flex flex-col md:items-center p-6 ">
-          <h1 className="text-green-600 font-semibold md:justify-center md:items-center text-4xl mb-4 mt-6 p-2 ">LOGIN</h1>
+          <h1 className="text-green-600 font-semibold justify-center items-center text-4xl mb-4 mt-6 p-2 ">LOGIN</h1>
           <form className="flex flex-col w-full">
 
           <label className="text-white text-2xl font-normal mb-2 items-baseline" htmlFor="Email">
