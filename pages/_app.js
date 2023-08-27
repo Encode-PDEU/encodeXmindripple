@@ -13,9 +13,9 @@ const roboto = Roboto({
 });
 export default function App({ Component, pageProps }) {
   return (
-    <main className={oswald.className}>
+    <main className={roboto.className}>
       <div className="relative overflow-x-hidden">
-        <div className="fixed top-0 left-0 z-0 pointer-events-none w-screen  opacity-20">
+        <div className="fixed top-0 left-0 z-0 pointer-events-none w-screen opacity-20">
           <ReactMatrixAnimation />
         </div>
         <div className="relative z-10">

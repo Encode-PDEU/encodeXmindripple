@@ -1,38 +1,101 @@
-import { useRouter } from 'next/router'; // Import the useRouter hook
+import { useState } from 'react';
 import NavBar from './navbar';
-
+import { ReactMatrixAnimation } from 'react-matrix-animation';
+import RootLayout from '@/app/layout';
+const riddlesData = [
+    {
+        question: "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I? I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I? ",
+        answer: "xyz"
+    },
+    {
+        question: "I have keys but open no locks. I have space but no room. You can enter, but you can't go outside. What am I? ",
+        answer: "mno"
+    },
+    {
+        question: "I am taken from a mine, and shut up in a wooden case, from which I am never released, and yet I am used by almost every person. What am I? ",
+        answer: "abc"
+    },
+    // Add more riddles here...
+];
 const Riddles = () => {
+    const [activeRiddleIndex, setActiveRiddleIndex] = useState(0);
+    const [userAnswer, setUserAnswer] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
+
+    const handlePreviousClick = () => {
+        setActiveRiddleIndex(prevIndex => Math.max(prevIndex - 1, 0));
+        setUserAnswer("");
+        setShowMessage(false);
+    };
+
+    const handleNextClick = () => {
+        if (userAnswer.toLowerCase() === riddlesData[activeRiddleIndex].answer.toLowerCase()) {
+            setActiveRiddleIndex(prevIndex => Math.min(prevIndex + 1, riddlesData.length - 1));
+            setUserAnswer("");
+            setShowMessage(false);
+        } else {
+            setShowMessage(true);
+        }
+    };
 
     return (
-        <div>
-            <div>
-                <NavBar />
-            </div>
-            <div className='mt-5 flex flex-row justify-between'>
-                <p className='text-yellow-600 text-7xl font-semibold'>RIDDLES N PUZZLES</p>
-                <div className='flex flex-col'>
-                    <p className='font-semibold text-3xl text-green-500 flex flex-row space-x-2'>Answered: <span className='text-white flex-row pl-2'>5/5</span> </p>
-                    <p className='font-semibold text-3xl text-green-500 flex flex-row'>Your Score: <span className='text-white flex-row pl-2'>2500</span ></p>
+        <div className='bg-matrixBlack'>
+            <NavBar />
+            <div className='mt-5 flex flex-col md:flex-row justify-between p-6 m-auto top-0 left-0 z-0 '>
+                <p className='text-yellow-600 text-4xl md:text-7xl font-semibold'>RIDDLES N PUZZLES</p>
+                <div className='flex flex-row md:flex-col text-xl md:text-3xl space-x-3'>
+                    <p className='font-semibold  text-green-500 flex flex-row space-x-2'>Answered: <span className='text-white flex-row pl-2'>5/5</span> </p>
+                    <p className='font-semibold  text-green-500 flex flex-row'>Your Score: <span className='text-white flex-row pl-2'>2500</span ></p>
+
                 </div>
             </div>
-            <div className='flex flex-row items-center justify-center h-screen'>
-                <button className='text-white text-3xl mr-6 h-[90px] w-[90px] bg-transparent'>&lt;</button> {/* Left Button */}
-                <div className='flex flex-col items-center justify-center'>
-                    <p className='text-green-500 font-semibold text-6xl mb-4 font-roboto'>Active Riddle</p>
-                    <p className='text-white font-normal text-3xl text-center'>
-                        Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis?
+            <div className='flex flex-row items-center justify-center mt-6 p-6 '>
+                <button
+                    className='text-white text-3xl w-[100px] h-[45px] bg-gray-900 rounded-full  items-center justify-center hidden md:flex '
+                    onClick={handlePreviousClick}
+                >
+                    &lt;
+                </button>
+
+
+                <div className='flex flex-col justify-normal  md:items-center md:justify-center'>
+                    <p className='text-green-500 font-semibold text-3xl md:text-6xl mb-4 font-roboto '>Active Riddle</p>
+                    <p className='text-white font-normal text-xl md:text-3xl justify-normal  md:items-center md:justify-center w-4/5 m-auto'>
+                        {riddlesData[activeRiddleIndex].question}
                     </p>
-                    <div className="w-60 h-px bg-gray-500 absolute  left-1/2 transform -translate-x-1/2">
+                </div>
+                <button className='text-white text-3xl w-[100px] h-[45px] bg-gray-900 rounded-full  items-center justify-center hidden md:flex '
+                    onClick={handleNextClick}>&gt;</button> {/* Right Button */}
+            </div>
+
+            <div className="flex md:flex-col flex-row md:items-center md:justify-center justify-start">
+                <div className="text-center flex flex-row md:flex-col pl-10">
                     <input
                         type="text"
-                        className="text-gray-500 font-semibold text-lg text-center bg-transparent border-b border-gray-500 outline-none"
+                        value={userAnswer}
+                        onChange={(e) => setUserAnswer(e.target.value)}
+                        className="mt-6 text-gray-500 font-semibold text-lg text-center bg-transparent border-b border-gray-500 outline-none md:w-[502px] w-[160px]"
                         placeholder="Enter your answer"
                     />
+                    {showMessage && <p className="text-red-500 mt-2">Wrong answer! Try again.</p>}
                 </div>
+                <div className='flex flex-row md:flex-col md:ml-4 '>
+                    <button className="border flex flex-col md:flex-row border-green-500 text-green-500 justify-center items-center rounded-lg  font-semibold text-2xl   md:w-[153px] md:h-[53px] w-[155] h-[60] md:mt-4 ml-3">
+                        Submit
+                    </button>
                 </div>
-                <button className='text-white text-3xl mr-6 h-[90px] w-[90px] bg-transparent'>&gt;</button> {/* Right Button */}
-                
             </div>
+            <div className='w-full flex justify-between p-6 md:hidden'>
+                <button className="w-[122px] h-[50px] font-semibold text-lg bg-gray-900 rounded-lg px-2 py-2" onClick={handleNextClick}>
+                    Previous
+                </button>
+                <button className='font-semibold text-lg bg-gray-900 rounded-lg px-2 py-2 w-[122px] h-[50px]' onClick={handleNextClick}>
+                    Next
+                </button>
+            </div>
+            <p className='justify-center flex flex-row items-center text-yellow-600 text-2xl md:text-3xl font-semibold mt-4 mb-5 '>
+                Next Riddle In:  2D: 10 H: 56 M: 10 S
+            </p>
 
         </div>
     );
