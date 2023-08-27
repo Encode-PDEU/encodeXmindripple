@@ -30,3 +30,8 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.bg-matrixBlack {
+  background-color: transparent; /* Set the desired background color */
+  /* Add other styling properties as needed */
+}
