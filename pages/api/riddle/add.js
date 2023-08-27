@@ -16,7 +16,6 @@ const { error } = await supabase
     return res.status(500).json('Unable to nadd riddle.')
   }
   return res.status(200).json({msg: 'Riddle stored in DB'})
-  
   }
 }
 
