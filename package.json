@@ -17,6 +17,7 @@
     "eslint-config-next": "13.4.15",
     "next": "13.4.15",
     "postcss": "8.4.27",
+    "query-parse": "^2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-matrix-animation": "^0.0.11",
