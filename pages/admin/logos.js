@@ -1,6 +1,17 @@
+import { Oswald, Roboto } from '@next/font/google';
+const oswald = Oswald({
+    subsets: ['latin'],
+    weight: ['400', '500', '600'],
+  });
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+  });
+
 const Logos_admin = () => {
     return ( 
-        <div className="flex md:h-screen flex-col  space-y-8 align-middle justify-center ">
+        <div className={` ${oswald.className} flex md:h-screen flex-col  space-y-8 align-middle justify-center`}>
         <div className="flex flex-row items-center flex-wrap gap-x-4 justify-center"> {/* Add flex-wrap and justify-center for mobile responsiveness */}
           <img src="/images/mindripple_logo.png" alt="MindRipple Logo" className="h-[100px] w-[101px]" />
           <img src="/images/X.png" alt="x" className="h-[50px] w-[44px]" />

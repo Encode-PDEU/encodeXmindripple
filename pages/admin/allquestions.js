@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import SideNav from "./sidenav";
+import { Oswald, Roboto } from '@next/font/google';
+const oswald = Oswald({
+    subsets: ['latin'],
+    weight: ['400', '500', '600'],
+  });
 
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+  });
 
 const questions = [
     {
@@ -34,7 +43,7 @@ const Allquestions = () => {
     };
 
     return (
-        <div className="flex flex-row">
+        <div className={`${roboto.className} flex flex-row`}>
             <div>
                 {/* Left part */}
                 <SideNav />
@@ -46,10 +55,9 @@ const Allquestions = () => {
                     <button
                         className='text-white text-3xl w-[60px] h-[60px] bg-custom-161616 rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 ml-2'  onClick={handlePreviousClick}
 
-                    >
-                        &lt;
+                    > &lt;
                     </button>
-                    <p className="text-7xl font-semibold text-yellow-500">All Questions</p>
+                    <p className={`${oswald.className} text-7xl font-semibold text-yellow-500`}>ALL QUESTIONS</p>
                     <div className="mt-5">
                         <p className="text-green-500 font-semibold text-7xl">{questions[activeRiddleIndex].id}</p>
                         <p className="text-white text-3xl font-normal w-4/5 m-auto">
