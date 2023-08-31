@@ -17,7 +17,19 @@ export default async function handler(req,res) {
       return res.status(500).json('Unable to nadd riddle.')
     }
     if(data[0].answer == req.query.answer) {
-      console.log('Correct answer')
+      const { data, error } = await supabase.rpc (
+        "append_to_user_model",
+        {
+          user_email: req.query.email,
+          question_id: req.query.riddle_id
+        }
+
+      )
+          console.log('Correct answer')
+          if(error) {
+            console.log(error)
+            return res.status(500).json('Unable to add to table')
+          }
       return res.status(200).json({msg: 'Sahi jawab 150 rupees.'})
     }
     else {
