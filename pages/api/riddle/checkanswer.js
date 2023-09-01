@@ -31,11 +31,11 @@ export default async function handler(req,res) {
             console.log(error)
             return res.status(500).json('Unable to add to table')
           }
-      const { score_data, score_error } = await supabase.rpc (
-         "incrementScore",
+      const { data:score_data, error:score_error } = await supabase.rpc (
+         "incrementscore",
             {
               user_email: req.query.email,
-              score_gain: req.query.score
+              score_gain: parseInt(req.query.score)
             }
           )
             console.log('Score Added')
