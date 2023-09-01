@@ -9,7 +9,8 @@ const { error } = await supabase
   .from('Riddle')
   .insert({ 
     question: req.body.question ,
-    answer: req.body.answer 
+    answer: req.body.answer ,
+    date: req.body.date
   })
   if(error) {
     console.log(error)
@@ -18,5 +19,3 @@ const { error } = await supabase
   return res.status(200).json({msg: 'Riddle stored in DB'})
   }
 }
-
-  
