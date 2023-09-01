@@ -10,8 +10,6 @@ const NavBar = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-   
-
     return (
         <div className="relative">
             <div className={`fixed top-0 left-0 h-full w-full bg-black z-20 transition-opacity ${isMenuOpen ? 'opacity-50' : 'opacity-0 pointer-events-none'}`}></div>
