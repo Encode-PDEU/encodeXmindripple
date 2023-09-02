@@ -13,7 +13,7 @@ const roboto = Roboto({
 });
 export default function App({ Component, pageProps }) {
   return (
-    <main className={roboto.className}>
+    <main className={`${oswald.className} ${roboto.className}`}>
       <div className="relative overflow-x-hidden">
         <div className="fixed top-0 left-0 z-0 pointer-events-none w-screen opacity-20">
           <ReactMatrixAnimation />

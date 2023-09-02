@@ -15,9 +15,6 @@ module.exports = {
           'green': '#02A556',
         },
       },
-      backgroundColor: {
-        custom: '#161616', // Replace with your desired color value
-      },
       fontFamily: {
         'oswald': ['var(--font-oswald)'],
         'roboto': ['var(--font-roboto)'],

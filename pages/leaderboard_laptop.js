@@ -75,7 +75,7 @@ export default function Leaderboard_laptop() {
       <div className="fixed bottom-0 w-full">
         <div className="bg-custom p-3 md:p-5">
           {participants.map((participant, index) => (
-            <div key={index} className={`p-2 md:p-4 md:flex md:flex-row md:items-center justify-between ${index % 2 === 0 ? 'bg-custom' : 'bg-black'}`}>
+            <div key={index} className={`p-2 md:p-4 md:flex md:flex-row md:items-center justify-between ${index % 2 === 0 ? 'bg-custom-161616' : 'bg-black'}`}>
               <span className="text-custom-green font-roboto md:text-2xl font-medium text-center">{participant.rank}</span>
               <span className="tracking-wide text-custom-green font-roboto md:text-2xl font-medium max-w-[200px] text-center">{participant.name}</span>
               <span className="text-custom-green font-roboto md:text-2xl font-medium text-center">{participant.points}</span>
