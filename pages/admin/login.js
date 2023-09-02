@@ -2,17 +2,27 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Logos_admin from "./logos";
+import { Oswald, Roboto } from '@next/font/google';
+const oswald = Oswald({
+    subsets: ['latin'],
+    weight: ['400', '500', '600'],
+  });
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+  });
 
 const Adminlogin = () => {
 
   return (
-    <div className="flex flex-col md:flex-row h-full">
+    <div className= {` ${roboto.className} flex flex-col md:flex-row h-full`}>
       <div className="md:w-[50%] bg-black p-6 ">
         <Logos_admin />
       </div>
       <div className="md:w-[50%] bg-custom-161616">
         <div className="flex flex-col md:items-center p-6 ">
-          <h1 className="text-green-600 font-semibold justify-center items-center text-4xl mb-4 mt-6 p-2 ">LOGIN</h1>
+          <h1 className={`${oswald.className} text-green-600 font-semibold justify-center items-center text-4xl mb-4 mt-6 p-2`}>LOGIN</h1>
           <form className="flex flex-col w-full">
 
           <label className="text-white text-2xl font-normal mb-2 items-baseline" htmlFor="Email">
@@ -35,7 +45,7 @@ const Adminlogin = () => {
             <div className="flex justify-center mt-4">
               <button
                 type="submit"
-                className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black   "
+                className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black  transition ease-linear duration-300  "
               >
                 LogIn
               </button>

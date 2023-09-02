@@ -1,8 +1,17 @@
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Logos from "./components/logos";
 import { ReactMatrixAnimation } from "react-matrix-animation";
+import { Oswald, Roboto } from '@next/font/google';
+const oswald = Oswald({
+    subsets: ['latin'],
+    weight: ['400', '500', '600'],
+  });
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+  });
 
 const Login = () => {
   const router = useRouter();
@@ -32,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <div className="">
+    <div className={` ${roboto.className} flex md:h-screen flex-col  space-y-8 align-middle justify-center`}>
 
       {isMobile && <ReactMatrixAnimation />}
       <div className="relative h-screen bg-matrixBlack">
@@ -42,7 +51,7 @@ const Login = () => {
           </div>
           <div className="md:w-[50%] md:bg-custom-161616 h-screen ">
             <div className="flex flex-col md:items-center p-6 bg-matrixBlack">
-              <h1 className="text-green-600 font-semibold justify-center items-center md:justify-center md:items-center text-4xl mb-4 mt-6 p-2">
+              <h1 className={`${oswald.className} text-green-600 font-semibold justify-center items-center md:justify-center md:items-center text-5xl mb-4 mt-6 p-2 `}>
                 LOGIN
               </h1>
               <form className="flex flex-col w-full">
@@ -82,7 +91,6 @@ const Login = () => {
                     LogIn
                   </button>
                 </div>
-
               </form>
             </div>
           </div>

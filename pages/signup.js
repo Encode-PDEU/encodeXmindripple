@@ -2,6 +2,16 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Logos from "./components/logos";
+import { Oswald, Roboto } from '@next/font/google';
+const oswald = Oswald({
+    subsets: ['latin'],
+    weight: ['400', '500', '600'],
+  });
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '500', '700'],
+  });
 
 const Signup = () => {
   const router = useRouter();
@@ -12,14 +22,14 @@ const Signup = () => {
     router.push("/riddles"); // Direct to the riddles page
   };
   return (
-    <div className="flex flex-col md:flex-row h-full">
+    <div className={` ${roboto.className} flex flex-col md:flex-row h-full`}>
       <div className="md:w-[50%] bg-black p-6">
         <Logos />
       </div>
       <div className="md:w-[50%] bg-custom-161616">
 
         <div className="flex flex-col md:items-center  p-6 ">
-          <h1 className="text-green-600 font-semibold justify-center items-center text-3xl mb-4 mt-6 ">SIGNUP</h1>
+          <h1 className={` ${oswald.className} text-green-600 font-semibold justify-center items-center text-3xl mb-4 mt-6 `}>SIGNUP</h1>
           <form className="flex flex-col">
 
             <div className='flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3'>
@@ -64,7 +74,7 @@ const Signup = () => {
             <div className="flex justify-center mt-4">
               <button
                 type="submit"
-                className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black "
+                className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black transition ease-linear duration-300  "
               >
                 SignUp
               </button>
