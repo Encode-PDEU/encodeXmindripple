@@ -26,7 +26,7 @@ const Adminlogin = () => {
           <form className="flex flex-col w-full">
 
           <label className="text-white text-2xl font-normal mb-2 items-baseline" htmlFor="Email">
-              Email
+              Emailn
             </label>
             <input className="border rounded-lg w-full py-2 px-3 text-gray-500 bg-opacity-0 bg-black mb-5 mt-1" id="Email" placeholder="Enter your Email" required></input>
 

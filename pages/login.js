@@ -50,7 +50,7 @@ const Login = () => {
             <Logos />
           </div>
           <div className="md:w-[50%] md:bg-custom-161616 h-screen ">
-            <div className="flex flex-col md:items-center p-6 bg-matrixBlack">
+            <div className="flex flex-col md:items-center p-6 bg-matrixBlack bg-custom-161616">
               <h1 className={`${oswald.className} text-green-600 font-semibold justify-center items-center md:justify-center md:items-center text-5xl mb-4 mt-6 p-2 `}>
                 LOGIN
               </h1>
