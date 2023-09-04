@@ -1,5 +1,7 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import axios from "axios";
+import { ReactMatrixAnimation } from "react-matrix-animation";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Logos from "./components/logos";
 import { Oswald, Roboto } from '@next/font/google';
@@ -13,8 +15,28 @@ const roboto = Roboto({
     weight: ['400', '500', '700'],
   });
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 const Signup = () => {
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if the window width is less than a certain value (e.g., 768 for mobile)
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 748);
+    };
+
+    // Initial check
+    checkIsMobile();
+
+    // Add a listener for window resize
+    window.addEventListener("resize", checkIsMobile);
+
+    // Clean up the listener when the component is unmounted
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
 
   const handleSignup = (event) => {
     event.preventDefault(); // Prevent the form from submitting
@@ -23,6 +45,8 @@ const Signup = () => {
   };
   return (
     <div className={` ${roboto.className} flex flex-col md:flex-row h-full`}>
+
+      {isMobile && <ReactMatrixAnimation />}
       <div className="md:w-[50%] bg-black p-6">
         <Logos />
       </div>
@@ -66,9 +90,9 @@ const Signup = () => {
             <div className="flex flex-col md:flex-row items-center justify-between">
               <p className="text-white text-xl font-normal" type="button">
                 Already have an account?
-                <a href="/login" className="inline-block align-baseline font-normal text-xl md:ml-60 ml-10">
+                <Link href="/login" className="inline-block align-baseline font-normal text-xl md:ml-60 ml-10">
                   Login
-                </a>
+                </Link>
               </p>
             </div>
             <div className="flex justify-center mt-4">

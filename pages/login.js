@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import Logos from "./components/logos";
 import { ReactMatrixAnimation } from "react-matrix-animation";
 import { Oswald, Roboto } from '@next/font/google';
+import axios from "axios";
+import Link from "next/link";
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['400', '500', '600'],
@@ -13,10 +15,13 @@ const roboto = Roboto({
     weight: ['400', '500', '700'],
   });
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 const Login = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   useEffect(() => {
     // Check if the window width is less than a certain value (e.g., 768 for mobile)
     const checkIsMobile = () => {
@@ -34,10 +39,17 @@ const Login = () => {
       window.removeEventListener("resize", checkIsMobile);
     };
   }, []);
-
-  const handleSignup = (event) => {
+  
+  const handleLogin = (event) => {
     event.preventDefault();
-    router.push("/riddles");
+    axios.post(`${API_URL}/user/login`, {email: email, password: password}).then((res) => {
+      console.log(res.data)
+      localStorage.setItem('token', JSON.stringify(res.data))
+       router.push("/riddles")
+    })
+    .catch((err) =>  {
+      console.log(err)
+    })
   };
 
   return (
@@ -62,6 +74,8 @@ const Login = () => {
                   className="border rounded-lg w-full py-2 px-3 text-gray-500 bg-opacity-0 bg-black mb-5 mt-1"
                   id="Email"
                   placeholder="Enter your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
 
@@ -73,20 +87,23 @@ const Login = () => {
                   id="password"
                   type="password"
                   placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <div className="flex flex-col md:flex-row items-center justify-between">
                   <p className="text-white text-xl font-normal" type="button">
-                    Don't have an account?
-                    <a href="/signup" className="inline-block align-baseline font-normal text-xl md:ml-60 ml-10">
+                    Do not have an account?
+                    <Link href="/signup" className="inline-block align-baseline font-normal text-xl md:ml-60 ml-10">
                       Sign up
-                    </a>
+                    </Link>
                   </p>
                 </div>
                 <div className="flex justify-center mt-4">
                   <button
                     type="submit"
                     className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black"
+                    onClick={handleLogin}
                   >
                     LogIn
                   </button>
