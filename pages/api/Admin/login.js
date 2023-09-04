@@ -24,7 +24,7 @@ export default async function handler(req,res) {
     else {
       console.log('Wrong details')
       console.log(req.body)
-         return res.status(400).json({Error: 'tmkc'})
+         return res.status(400).json({Error: 'Enter correct credentials.'})
    }
   }
 }
