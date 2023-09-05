@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'; // Import the useRouter hook
 import Login from './login';
 import { ReactMatrixAnimation } from 'react-matrix-animation';
 import { Oswald, Roboto } from '@next/font/google';
+import Image from 'next/image';
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['400', '500', '600'],
@@ -31,9 +32,9 @@ export default function App() {
     <div className={` ${roboto.className} flex h-screen flex-col justify-center items-center bg-matrixBlack space-y-8`}>
       <ReactMatrixAnimation />
       <div className="flex flex-row items-center flex-wrap gap-x-4 justify-center"> {/* Add flex-wrap and justify-center for mobile responsiveness */}
-        <img src="/images/mindripple_logo.png" alt="MindRipple Logo" className="h-[150px] w-[181px]"/>
-        <img src="/images/X.png" alt="x" className="h-[80px] w-[44px]"/>
-        <img src="/images/Encode_Logo.png" alt="Encode Logo" className="h-[150px] w-[150px]" />
+        <Image src="/Images/mindripple_logo.png" width= {500} height= {500} alt="MindRipple Logo" className="h-[150px] w-[181px]"/>
+        <Image src="/Images/X.png" alt="x" width= {500} height= {500} className="h-[80px] w-[44px]"/>
+        <Image src="/Images/Encode_Logo.png" alt="Encode Logo" width= {500} height= {500}  className="h-[150px] w-[150px]" />
       </div>
       <div className= {`${oswald.className} flex flex-row font-semibold text-3xl sm:text-7xl `}> {/* Use different font size for mobile and larger screens */}
         <p className="text-green-500">Surf</p>

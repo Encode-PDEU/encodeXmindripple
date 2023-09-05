@@ -45,7 +45,7 @@ const Adminlogin = () => {
     axios.post(`${API_URL}/Admin/login`, {email: email, password: password}).then((res) => {
       console.log(res.data)
       localStorage.setItem('token', JSON.stringify(res.data))
-       router.push("/riddles")
+       router.push("postquestion")
     })
     .catch((err) =>  {
       console.log(err)

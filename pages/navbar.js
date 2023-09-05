@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NavBar = () => {
     const router = useRouter();
@@ -66,9 +67,9 @@ const NavBar = () => {
                 <div className="flex items-center justify-between p-6">
                     <div className="flex items-center gap-x-4">
                         <div className="flex flex-row items-center gap-x-4 md:h-[40px] md:w-[50px]">
-                            <img src="/Images/mindripple_logo.png" alt="MindRipple Logo" className="h-[40px] w-[50px]" />
-                            <img src="/Images/X.png" alt="x" className="h-[30px] w-[18px]" />
-                            <img src="/Images/Encode_Logo.png" alt="Encode Logo" className="h-[42px] w-[52px]" />
+                            <Image src="/Images/mindripple_logo.png" alt="MindRipple Logo" width= {500} height= {500} className="h-[40px] w-[50px]" />
+                            <Image src="/Images/X.png" alt="x" width= {500} height= {500} className="h-[30px] w-[18px]" />
+                            <Image src="/Images/Encode_Logo.png" alt="Encode Logo" width= {500} height= {500} className="h-[42px] w-[52px]" />
                         </div>
                     </div>
                     <div className={`md:flex md:items-center md:flex-row md:justify-center md:gap-x-8 md:ml-28  ${isMenuOpen ? 'hidden' : 'hidden'}`}>
