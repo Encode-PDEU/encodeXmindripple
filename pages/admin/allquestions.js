@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ReactMatrixAnimation } from "react-matrix-animation";
 import SideNav from "./sidenav";
 import { Oswald, Roboto } from '@next/font/google';
+
+
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['400', '500', '600'],
@@ -10,7 +14,8 @@ const roboto = Roboto({
     subsets: ['latin'],
     weight: ['400', '500', '700'],
   });
-
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
+  
 const questions = [
     {
         id: "01",
@@ -31,6 +36,8 @@ const questions = [
 
 const Allquestions = () => {
     const [activeRiddleIndex, setActiveRiddleIndex] = useState(0);
+    const [question, setQuestion] = useState("")
+    const [answer, setAnswer] = useState("")
 
     const handlePreviousClick = () => {
         const newIndex = Math.max(activeRiddleIndex - 1, 0);
