@@ -12,8 +12,8 @@ const SideNav = () => {
                 </div>
                 <div className="mt-8 ml-5 flex flex-col">
 
-                    <Link href="/admin/allquestions" className={`text-4xl font-normal w-[328px] h-[68px]  justify-center items-center flex flex-row ${router.pathname === '/admin/allquestions' ? 'bg-custom-1E1E1E rounded-md' : ''}`}>All Questions</Link>
-                    <Link href="/admin/postquestion" className={`text-4xl font-normal w-[328px] h-[68px]  justify-center items-center flex flex-row ${router.pathname === '/admin/postquestion' ? 'bg-custom-1E1E1E rounded-md' : ''}`}>Post Question</Link>
+                    <Link href="/admin/allquestions" className={`text-3xl font-normal w-[328px] h-[68px]  justify-center items-center flex flex-row ${router.pathname === '/admin/allquestions' ? 'bg-custom-1E1E1E rounded-md' : ''}`}>All Questions</Link>
+                    <Link href="/admin/postquestion" className={`text-3xl font-normal w-[328px] h-[68px]  justify-center items-center flex flex-row ${router.pathname === '/admin/postquestion' ? 'bg-custom-1E1E1E rounded-md' : ''}`}>Post Question</Link>
                 </div>
             </div>
      );

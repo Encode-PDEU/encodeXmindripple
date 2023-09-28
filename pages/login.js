@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Logos from "./components/logos";
+import Layout from '../app/layout'
 import { ReactMatrixAnimation } from "react-matrix-animation";
 import { Oswald, Roboto } from '@next/font/google';
 import axios from "axios";
 import Link from "next/link";
+import {toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
+
+
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['400', '500', '600'],
@@ -15,7 +20,9 @@ const roboto = Roboto({
     weight: ['400', '500', '700'],
   });
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+
 const Login = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
@@ -45,14 +52,25 @@ const Login = () => {
     axios.post(`${API_URL}/user/login`, {email: email, password: password}).then((res) => {
       console.log(res.data)
       localStorage.setItem('token', JSON.stringify(res.data))
+      toast.success("Logged in Successfully!!",{
+        position: "bottom-right",
+        autoClose: 2000
+      });
        router.push("/riddles")
     })
     .catch((err) =>  {
       console.log(err)
+      toast.warn("Login failed", {
+        position: "bottom-right"
+      });
+      
     })
   };
 
   return (
+
+
+    <>
     <div className={` ${roboto.className} flex md:h-screen flex-col  space-y-8 align-middle justify-center`}>
 
       {isMobile && <ReactMatrixAnimation />}
@@ -61,7 +79,7 @@ const Login = () => {
           <div className="md:w-[50%]  p-6 md:bg-black">
             <Logos />
           </div>
-          <div className="md:w-[50%] md:bg-custom-161616 h-screen ">
+          <div className="md:w-[50%] md:bg-custom-161616 h-screen pt-10 ">
             <div className="flex flex-col md:items-center p-6 bg-matrixBlack bg-custom-161616">
               <h1 className={`${oswald.className} text-green-600 font-semibold justify-center items-center md:justify-center md:items-center text-5xl mb-4 mt-6 p-2 `}>
                 LOGIN
@@ -91,21 +109,22 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <div className="flex flex-col md:flex-row items-center justify-between">
-                  <p className="text-white text-xl font-normal" type="button">
-                    Do not have an account?
-                    <Link href="/signup" className="inline-block align-baseline font-normal text-xl md:ml-60 ml-10">
+                <div className="flex flex-row items-center justify-between">
+                  <div className="">
+                   <p>Do not have an account</p> 
+                  </div>
+                  <div>
+                  <Link href="/signup" className=" align-baseline font-normal text-lg ">
                       Sign up
                     </Link>
-                  </p>
+                  </div>
                 </div>
                 <div className="flex justify-center mt-4">
                   <button
                     type="submit"
                     className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black"
                     onClick={handleLogin}
-                  >
-                    LogIn
+                  >LogIn
                   </button>
                 </div>
               </form>
@@ -114,6 +133,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -5,6 +5,10 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Logos from "./components/logos";
 import { Oswald, Roboto } from '@next/font/google';
+import {toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
+
+
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['400', '500', '600'],
@@ -45,10 +49,17 @@ const Signup = () => {
     axios.post(`${API_URL}/user/signup`, {email: email, password: password}).then((res) => {
       console.log(res.data)
       localStorage.setItem('token', JSON.stringify(res.data))
+      toast.success("Signup  Successfull !!",{
+        position: "bottom-right",
+        autoClose: 2000
+      });
        router.push("/riddles")
     })
     .catch((err) =>  {
       console.log(err)
+      toast.warn("Signup failed", {
+        position: "bottom-right"
+      });
     })
   };
   return (
@@ -69,7 +80,7 @@ const Signup = () => {
                 <label className="text-white text-2xl font-normal mb-2 items-baseline" htmlFor="Name">
                   Name
                 </label>
-                <input className="border rounded-lg py-2 px-3 text-gray-500 bg-opacity-0 bg-black mb-5 mt-1 md:w-[250px] md:h-[55px]" id="Name" placeholder="Enter your Name" required/>
+                <input className="border rounded-lg py-2 px-3 bg-opacity-0 bg-black mb-5 mt-1 md:w-[250px] md:h-[55px] text-white" id="Name" placeholder="Enter your Name" required/>
               </div>
 
               <div className="flex flex-col"> {/* Container for Roll No */}
@@ -77,20 +88,20 @@ const Signup = () => {
                   Roll No
                 </label>
                 <input
-                  className="border rounded-lg py-2 px-3 text-gray-500 bg-opacity-0 bg-black mb-5 mt-1 md:w-[250px] md:h-[55px]" id="RollNo" placeholder="Enter your Roll Number" required/>
+                  className="border rounded-lg py-2 px-3 text-white bg-opacity-0 bg-black mb-5 mt-1 md:w-[250px] md:h-[55px]" id="RollNo" placeholder="Enter your Roll Number" required/>
               </div>
             </div>
 
             <label className="text-white text-2xl font-normal mb-2 pt-3" htmlFor="Contact">
               Contact
             </label>
-            <input className="border rounded-lg py-2 px-3 text-gray-500 bg-opacity-0 bg-black mb-5 mt-1" id="Contact" placeholder="Enter your Contact Number" required></input>
+            <input className="border rounded-lg w-full py-2 px-3 text-white bg-opacity-0 bg-black mb-5 mt-1" id="Contact" placeholder="Enter your Contact Number" required></input>
 
             <label className="text-white text-2xl font-normal mb-2" htmlFor="Email">
               Email
             </label>
             <input
-                  className="border rounded-lg w-full py-2 px-3 text-gray-500 bg-opacity-0 bg-black mb-5 mt-1"
+                  className="border rounded-lg w-full py-2 px-3 text-white bg-opacity-0 bg-black mb-5 mt-1"
                   id="Email"
                   placeholder="Enter your Email"
                   value={email}
@@ -102,7 +113,7 @@ const Signup = () => {
               Password
             </label>
             <input
-                  className="border rounded-lg w-full py-2 px-3 text-gray-500 bg-opacity-0 bg-black p-4 mb-5 mt-1 "
+                  className="border rounded-lg w-full py-2 px-3 text-white bg-opacity-0 bg-black p-4 mb-5 mt-1 "
                   id="password"
                   type="password"
                   placeholder="Enter Password"
@@ -110,14 +121,16 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <p className="text-white text-xl font-normal" type="button">
-                Already have an account?
-                <Link href="/login" className="inline-block align-baseline font-normal text-xl md:ml-60 ml-10">
-                  Login
-                </Link>
-              </p>
-            </div>
+            <div className="flex flex-row items-center justify-between">
+                  <div className="">
+                   <p>Already have an account</p> 
+                  </div>
+                  <div>
+                  <Link href="/login" className=" align-baseline font-normal text-lg ">
+                      Login
+                    </Link>
+                  </div>
+                </div>
             <div className="flex justify-center mt-4">
             <button
                     type="submit"
