@@ -1,6 +1,8 @@
 import "@/styles/globals.css";
 import { ReactMatrixAnimation } from "react-matrix-animation";
 import { Oswald, Roboto } from '@next/font/google';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -17,6 +19,9 @@ export default function App({ Component, pageProps }) {
       <div className="relative overflow-x-hidden">
         <div className="fixed top-0 left-0 z-0 pointer-events-none w-screen opacity-20">
           <ReactMatrixAnimation />
+        </div>
+        <div className="fixed z-1000 opacity">
+          <ToastContainer />
         </div>
         <div className="relative z-10">
           <Component {...pageProps} />

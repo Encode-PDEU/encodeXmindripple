@@ -77,28 +77,28 @@ const Postquestion = () => {
             {/* right part */}
 
             <div className=" flex flex-col mt-3  ml-4">
-    <div className={`${oswald.className} text-7xl font-semibold text-yellow-500 mb-2`}>POST QUESTION</div>
+    <div className={`${oswald.className} text-4xl font-semibold text-yellow-500 mb-2`}>POST QUESTION</div>
     <div className="flex flex-row mt-4">
     <form onSubmit={onSubmit} className="flex flex-col items-start">
-    <label className="font-normal text-4xl">Question</label> 
-    <textarea className="h-[179px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-2xl font-normal p-4" 
+    <label className="font-normal text-2xl">Question</label> 
+    <textarea className="h-[100px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-xl font-normal p-4" 
     placeholder="Enter Question"
     value={question}
     onChange={(e) => setQuestion(e.target.value)}
     ></textarea>
-    <label className="font-normal text-4xl">Answer</label> 
-    <textarea className="h-[65px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-2xl font-normal p-4 " 
+    <label className="font-normal text-22xl">Answer</label> 
+    <textarea className="h-[65px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-xl font-normal p-4 " 
     placeholder="Enter Correct Answer"
     value={answer}
     onChange={(e) => setAnswer(e.target.value)}
     ></textarea>
-    <label className="font-normal text-4xl">Date</label> 
+    <label className="font-normal text-2xl">Date</label> 
     <DatePicker selected={date}  onChange={handleDateChange} dateFormat="MMMM dd, yyyy" className="h-[65px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-2xl p-4"
     />
     <div className="flex justify-center mt-4">
         <button
            type="submit"
-           className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black"
+           className="inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[200px] h-[50px] rounded py-2 px-4 text-black"
            value={state}
            onInput={onInput}
            onClick={handlePost}

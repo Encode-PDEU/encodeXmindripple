@@ -77,9 +77,9 @@ const Allquestions = () => {
 
                     > &lt;
                     </button>
-                    <p className={`${oswald.className} text-7xl font-semibold text-yellow-500`}>ALL QUESTIONS</p>
+                    <p className={`${oswald.className} text-4xl font-semibold text-yellow-500`}>ALL QUESTIONS</p>
                     <div className="mt-5">
-                        <p className="text-green-500 font-semibold text-7xl">{questions[activeRiddleIndex]?.riddle_id}</p>
+                        <p className="text-green-500 font-semibold text-2xl">{questions[activeRiddleIndex]?.riddle_id}</p>
                         <p className="text-white text-3xl font-normal w-4/5 m-auto">
                             {questions[activeRiddleIndex]?.question}
                         </p>

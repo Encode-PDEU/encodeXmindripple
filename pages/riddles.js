@@ -48,11 +48,11 @@ const Riddles = () => {
     };
 
     return (
-        <div className={` ${roboto.className} bg-matrixBlack`}>
+        <div className={` ${roboto.className} bg-matrixBlack z-999`}>
             <NavBar />
             <div className='mt-5 flex flex-col md:flex-row justify-between p-6 m-auto top-0 left-0 z-0 '>
-                <p className= {`${oswald.className} text-yellow-600 text-4xl md:text-7xl font-semibold`}>RIDDLES N PUZZLES</p>
-                <div className='flex flex-row md:flex-col text-xl md:text-3xl space-x-3'>
+                <p className= {`${oswald.className} text-yellow-600 text-3xl md:text-5xl font-semibold`}>RIDDLES N PUZZLES</p>
+                <div className='flex flex-row md:flex-col text-lg md:text-2xl space-x-3'>
                     <p className='font-semibold  text-green-500 flex flex-row space-x-2'>Answered: <span className='text-white flex-row pl-2'>5/5</span> </p>
                     <p className='font-semibold  text-green-500 flex flex-row'>Your Score: <span className='text-white flex-row '>2500</span ></p>
 
@@ -60,14 +60,14 @@ const Riddles = () => {
             </div>
             <div className='flex flex-row items-center justify-center mt-6 p-6 '>
                 <button
-                    className='text-white text-3xl w-[150px] h-[60px] bg-custom-1E1E1E rounded-full  items-center justify-center hidden md:flex '
+                    className='text-white text-2xl w-[150px] h-[60px] bg-custom-1E1E1E rounded-full  items-center justify-center hidden md:flex '
                     onClick={handlePreviousClick}
                 >
                     &lt;
                 </button>
                 <div className='flex flex-col justify-normal  md:items-center md:justify-center'>
-                    <p className='text-green-500 font-semibold text-3xl md:text-6xl mb-4 font-roboto '>Active Riddle</p>
-                    <p className='text-white font-normal text-xl md:text-3xl justify-normal  md:items-center md:justify-center w-4/5 text-[20px]'>
+                    <p className='text-green-500 font-semibold text-2xl md:text-3xl mb-4 font-roboto '>Active Riddle</p>
+                    <p className='text-white font-normal text-lg md:text-xl justify-normal  md:items-center md:justify-center w-4/5 text-[20px]'>
                         {riddlesData[activeRiddleIndex].question}
                     </p>
                 </div>
@@ -80,7 +80,7 @@ const Riddles = () => {
                         type="text"
                         value={userAnswer}
                         onChange={(e) => setUserAnswer(e.target.value)}
-                        className="mt-6 text-gray-500 font-semibold text-lg text-center bg-transparent border-b border-gray-500 outline-none md:w-[502px] w-[160px]"
+                        className="mt-6 text-gray-100 font-semibold text-lg text-center bg-transparent border-b border-gray-500 outline-none md:w-[502px] w-[160px]"
                         placeholder="Enter your answer"
                     />
                     {showMessage && <p className="text-red-500 mt-2">Wrong answer! Try again.</p>}
