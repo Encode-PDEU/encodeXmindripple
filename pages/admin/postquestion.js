@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SideNav from "./sidenav";
+import {getSession} from 'next-auth/react';
 import { ReactMatrixAnimation } from "react-matrix-animation";
 import DatePicker from 'react-datepicker'; // Import react-datepicker
 import 'react-datepicker/dist/react-datepicker.css'; // Import the styles
@@ -15,6 +16,18 @@ const roboto = Roboto({
     weight: ['400', '500', '700'],
   });
   const API_URL = process.env.NEXT_PUBLIC_API_URL
+  export async function getServerSideProps(context) {
+    const session = await getSession(context);
+  
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/admin/login',
+          permanent: false,
+        },
+      };
+    }
+  }
 const Postquestion = () => {
     const [state, setState] = useState("");
     const onInput = (e) => setState(e.target.value);
@@ -64,7 +77,7 @@ const Postquestion = () => {
 
     
     
-  
+
     return (
     <div className=  "flex flex-row">
 

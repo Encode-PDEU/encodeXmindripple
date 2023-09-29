@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {getSession} from 'next-auth/react';
 import { ReactMatrixAnimation } from "react-matrix-animation";
 import SideNav from "./sidenav";
 import { Oswald, Roboto } from '@next/font/google';
@@ -33,6 +34,19 @@ const roboto = Roboto({
 
 //     },
 // ];
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+  
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/admin/login',
+          permanent: false,
+        },
+      };
+    }
+  }
 
 const Allquestions = () => {
     const [questions, setQuestions] = useState([])
