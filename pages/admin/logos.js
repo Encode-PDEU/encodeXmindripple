@@ -13,8 +13,7 @@ const roboto = Roboto({
 
 const Logos_admin = () => {
     return ( 
-        <div className={` ${oswald.className} flex md:h-screen flex-col  space-y-8 align-middle justify-center`}>
-          <ReactMatrixAnimation />
+        <div className={` ${oswald.className} flex flex-col  align-middle justify-center h-screen`}>
         <div className="flex flex-row items-center flex-wrap gap-x-4 justify-center"> {/* Add flex-wrap and justify-center for mobile responsiveness */}
           <Image src="/Images/mindripple_logo.png" alt="MindRipple Logo" width= {500} height= {500} className="h-[100px] w-[101px]" />
           <Image src="/Images/X.png" alt="x" width= {500} height= {500} className="h-[50px] w-[44px]" />

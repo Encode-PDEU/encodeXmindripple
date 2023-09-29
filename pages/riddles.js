@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {getSession} from 'next-auth/react';
 import NavBar from './navbar';
 import { ReactMatrixAnimation } from 'react-matrix-animation';
 import { Oswald, Roboto } from '@next/font/google';
@@ -26,6 +27,22 @@ const riddlesData = [
     },
     // Add more riddles here...
 ];
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+  
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/login',
+          permanent: false,
+        },
+      };
+    }
+  }
+  
+
+
 const Riddles = () => {
     const [activeRiddleIndex, setActiveRiddleIndex] = useState(0);
     const [userAnswer, setUserAnswer] = useState("");
@@ -104,6 +121,8 @@ const Riddles = () => {
             </p>
         </div>
     );
+
+
 }
 
 export default Riddles;
