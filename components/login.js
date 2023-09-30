@@ -1,7 +1,7 @@
 import React, { useState, useEffect, CSSProperties } from "react"
 import { useRouter } from "next/router"
 import Logos from "@/components/logos"
-// import Layout from "../app/layout"
+import Layout from "../app/layout"
 import { ReactMatrixAnimation } from "react-matrix-animation"
 import { Oswald, Roboto } from "next/font/google"
 import axios from "axios"
@@ -22,7 +22,8 @@ const roboto = Roboto({
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
-const Login = () => {
+const Login = (props) => {
+  console.log(props)
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 

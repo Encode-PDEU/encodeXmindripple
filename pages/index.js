@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'; // Import the useRouter hook
 import Login from './login';
 import { ReactMatrixAnimation } from 'react-matrix-animation';
-import { Oswald, Roboto } from '@next/font/google';
+import { Oswald, Roboto } from "next/font/google";
 import Image from 'next/image';
 const oswald = Oswald({
     subsets: ['latin'],

@@ -1,9 +1,9 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import { ReactMatrixAnimation } from 'react-matrix-animation'
-import { ToastContainer } from 'react-toastify'
+import "./globals.css"
+import { Inter } from "next/font/google"
+import { ReactMatrixAnimation } from "react-matrix-animation"
+import { ToastContainer } from "react-toastify"
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 // export const metadata = {
 //   title: 'Create Next App',
@@ -12,10 +12,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
-    <div className="bg-matrixBlack min-h-screen">
-      <ReactMatrixAnimation />
-      <ToastContainer />
-      {children}
-    </div>
+    // <div className="min-h-screen">
+    //   <ReactMatrixAnimation />
+    //   <ToastContainer />
+    //   {children}
+    // </div>
+    <>{children}</>
   )
 }

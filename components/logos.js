@@ -1,4 +1,4 @@
-import { Oswald, Roboto } from '@next/font/google';
+import { Oswald, Roboto } from "next/font/google";
 import Image from 'next/image';
 const oswald = Oswald({
     subsets: ['latin'],
