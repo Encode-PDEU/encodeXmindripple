@@ -80,10 +80,10 @@ const NavBar = () => {
                 </div>
               </Link>
 
-              <Link href="/leaderboard_laptop">
+              <Link href="/leaderboard">
                 <div
                   className={`link-style pb-6 text-2xl ${
-                    router.pathname === "/leaderboard_laptop"
+                    router.pathname === "/leaderboard"
                       ? "text-green-500"
                       : "text-yellow-500"
                   }`}
