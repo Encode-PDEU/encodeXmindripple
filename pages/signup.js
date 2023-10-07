@@ -8,6 +8,7 @@ import { Oswald, Roboto } from "next/font/google"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { MoonLoader } from "react-spinners"
+import Image from "next/image"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -100,30 +101,64 @@ const Signup = () => {
   }
   return (
     <>
-      <div className={` ${roboto.className} flex flex-col md:flex-row h-full`}>
-        {isMobile && <ReactMatrixAnimation />}
-        <div className="md:w-[50%] bg-black p-6">
+      <div
+        className={` ${roboto.className} flex flex-col lg:flex-row h-full mt-8 lg:mt-0`}
+      >
+        {/* <div className="md:w-[50%] bg-black p-6">
+          <Logos />
+        </div> */}
+
+        <div className="lg:w-[45%]  px-6 pt-8 lg:pt-0">
+          {/* Below div is only for mobile screens */}
+          <div className="flex flex-row items-end flex-wrap gap-x-4 justify-center lg:hidden">
+            <Image
+              src="/Images/mindripple_logo.png"
+              alt="MindRipple Logo"
+              width={500}
+              height={500}
+              className="h-[65px] w-[75px] sm:h-[70px] sm:w-[80px] md:h-[90px] md:w-[100px]"
+            />
+            <h1 className="text-custom-yellow font-semibold text-3xl uppercase sm:text-4xl">
+              X
+            </h1>
+            <Image
+              src="/Images/Encode_Logo.png"
+              alt="Encode Logo"
+              width={500}
+              height={500}
+              className="h-16 w-20 sm:h-[68px] sm:w-[85px] md:h-[85px] md:w-[110px]"
+            />
+          </div>
+
+          {/* For desktop screens */}
+
           <Logos />
         </div>
-        <div className="md:w-[50%] bg-custom-161616">
-          <div className="flex flex-col md:items-center  p-6 ">
+
+        <div className="lg:w-[55%] lg:bg-custom-161616">
+          <div className="flex flex-col lg:items-center  p-6 md:px-20 lg:px-14 lg:mt-10 xl:mt-0">
             <h1
-              className={` ${oswald.className} text-green-600 font-semibold justify-center items-center text-3xl mb-4 mt-6 `}
+              className={`${oswald.className} text-custom-green text-center font-semibold justify-center items-center md:justify-center md:items-center text-5xl tmb-4 mt-6 p-2 lg:text-7xl`}
             >
               SIGNUP
             </h1>
-            <form className="flex flex-col">
-              <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3">
-                <div className="flex flex-col">
+            <form className="flex flex-col lg:mt-8 lg:w-full">
+              <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 md:justify-between">
+                <div className="flex flex-col md:w-full">
                   {/* Container for Name */}
                   <label
-                    className="text-white text-2xl font-normal mb-2 items-baseline"
+                    className="text-custom-grey text-2xl font-normal mb-2 items-baseline"
                     htmlFor="name"
                   >
                     Name
                   </label>
                   <input
-                    className="border rounded-lg py-2 px-3 bg-opacity-0 bg-black mb-5 mt-1 md:w-[250px] md:h-[55px] text-white"
+                    className="border rounded-lg py-2 px-3 bg-opacity-0 bg-black mb-5 mt-1 md:h-[55px] text-custom-grey
+                    placeholder:text-custom-dark-grey border-custom-dark-grey
+                    focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent
+                    md:w-full
+                    text-lg
+                    "
                     id="name"
                     name="name"
                     placeholder="Enter your Name"
@@ -133,16 +168,23 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="flex flex-col">
+                <div className="flex flex-col md:w-full">
                   {/* Container for Roll No */}
                   <label
-                    className="text-white text-2xl font-normal mb-2 items-baseline "
+                    className="text-custom-grey text-2xl font-normal mb-2 items-baseline "
                     htmlFor="rollNo"
                   >
                     Roll No
                   </label>
                   <input
-                    className="border rounded-lg py-2 px-3 text-white bg-opacity-0 bg-black mb-5 mt-1 md:w-[250px] md:h-[55px]"
+                    className="border rounded-lg py-2 px-3  mb-5 mt-1 md:h-[55px]
+                    text-custom-grey
+                    placeholder:text-custom-dark-grey border-custom-dark-grey
+                    focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent
+                    bg-transparent
+                    md:w-full
+                    text-lg
+                    "
                     id="rollNo"
                     name="rollNo"
                     placeholder="Enter your Roll Number"
@@ -154,13 +196,18 @@ const Signup = () => {
               </div>
 
               <label
-                className="text-white text-2xl font-normal mb-2 pt-3"
+                className="text-custom-grey text-2xl font-normal mb-2 pt-3"
                 htmlFor="contact"
               >
                 Contact
               </label>
               <input
-                className="border rounded-lg w-full py-2 px-3 text-white bg-opacity-0 bg-black mb-5 mt-1"
+                className="border rounded-lg w-full py-2 px-3 bg-transparent mb-5 mt-1
+                text-custom-grey
+                    placeholder:text-custom-dark-grey border-custom-dark-grey
+                    focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent
+                    text-lg
+                "
                 id="contact"
                 name="contact"
                 placeholder="Enter your Contact Number"
@@ -170,13 +217,18 @@ const Signup = () => {
               ></input>
 
               <label
-                className="text-white text-2xl font-normal mb-2"
+                className="text-custom-grey text-2xl font-normal mb-2"
                 htmlFor="email"
               >
                 Email
               </label>
               <input
-                className="border rounded-lg w-full py-2 px-3 text-white bg-opacity-0 bg-black mb-5 mt-1"
+                className="border rounded-lg w-full py-2 px-3  bg-transparent mb-5 mt-1
+                text-custom-grey
+                    placeholder:text-custom-dark-grey border-custom-dark-grey
+                    focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent
+                    text-lg
+                "
                 id="email"
                 name="email"
                 placeholder="Enter your Email"
@@ -186,13 +238,16 @@ const Signup = () => {
               />
 
               <label
-                className="text-white text-2xl font-normal"
+                className="text-custom-grey text-2xl font-normal"
                 htmlFor="password"
               >
                 Password
               </label>
               <input
-                className="border rounded-lg w-full py-2 px-3 text-white bg-opacity-0 bg-black p-4 mb-5 mt-1 "
+                className="border rounded-lg w-full py-2 px-3 bg-transparent p-4 mb-5 mt-1 text-custom-grey
+                placeholder:text-custom-dark-grey border-custom-dark-grey
+                focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent
+                text-lg"
                 id="password"
                 name="password"
                 type="password"
@@ -202,23 +257,22 @@ const Signup = () => {
                 required
               />
               <div className="flex flex-row items-center justify-between">
-                <div className="">
-                  <p>Already have an account</p>
+                <div className="text-custom-grey text-lg">
+                  <p>Already have an account?</p>
                 </div>
                 <div>
                   <Link
                     href="/login"
-                    className=" align-baseline font-normal text-lg "
+                    className=" align-baseline font-normal text-lg text-custom-grey underline"
                   >
                     Login
                   </Link>
                 </div>
               </div>
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-6">
                 <button
                   type="submit"
-                  className={`"inline-block align-baseline font-semibold text-2xl bg-yellow-500 w-[350px] h-[50px] rounded py-2 px-4 text-black"
-                onClick={handleSignup
+                  className={`inline-block align-baseline font-semibold text-2xl bg-custom-yellow w-[350px] h-[50px] rounded-md py-2 px-4 text-black
                   ${
                     isLoading
                       ? "opacity-50 cursor-not-allowed"
