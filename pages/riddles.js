@@ -130,7 +130,7 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/riddle/question`)
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         setRiddlesData(res.data)
 
         console.log("IMP")
@@ -360,6 +360,19 @@ const Riddles = () => {
           <MoonLoader color="#ffffff" size={70} />
           <h1 className="text-yellow-500 text-2xl font-semibold ml-2 mt-4">
             Loading...
+          </h1>
+        </div>
+      </div>
+    )
+  }
+
+  if (riddlesData.length == 0) {
+    return (
+      <div className={` ${roboto.className} bg-matrixBlack z-999`}>
+        <NavBar />
+        <div className="h-[80vh] w-full flex flex-col items-center justify-center">
+          <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4">
+            No riddles available. Please try again later.
           </h1>
         </div>
       </div>

@@ -49,7 +49,6 @@ const Postquestion = () => {
     question: "",
     answer: "",
     date: new Date(),
-    time: "",
   })
 
   const handleFormData = (e) => {
@@ -93,7 +92,6 @@ const Postquestion = () => {
           question: "",
           answer: "",
           date: new Date(),
-          time: "",
         })
       })
       .catch((err) => {
@@ -114,19 +112,26 @@ const Postquestion = () => {
       </div>
       {/* right part */}
 
-      <div className=" flex flex-col mt-3  ml-4">
+      <div className=" flex flex-col mt-16  ml-10">
         <div
-          className={`${oswald.className} text-4xl font-semibold text-yellow-500 mb-2`}
+          className={`${oswald.className} text-5xl font-semibold text-custom-yellow mb-2`}
         >
           POST QUESTION
         </div>
         <div className="flex flex-row mt-4">
           <form className="flex flex-col items-start">
-            <label className="font-normal text-2xl" htmlFor="question">
+            <label
+              className="font-normal text-2xl text-custom-grey"
+              htmlFor="question"
+            >
               Question
             </label>
             <textarea
-              className="h-[100px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-xl font-normal p-4"
+              className="h-[100px] w-[800px] bg-transparent border border-custom-grey rounded-xl mt-4 mb-5 text-xl font-normal p-4 text-custom-grey
+              placeholder:text-custom-dark-grey
+
+              focus:outline-none focus:ring-1 focus:ring-custom-green focus:border-transparent
+              "
               placeholder="Enter Question"
               id="question"
               name="question"
@@ -134,11 +139,19 @@ const Postquestion = () => {
               onChange={handleFormData}
               required
             ></textarea>
-            <label className="font-normal text-22xl" htmlFor="answer">
+            <label
+              className="font-normal text-custom-grey text-2xl"
+              htmlFor="answer"
+            >
               Answer
             </label>
             <input
-              className="h-[65px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-xl font-normal p-4 "
+              className="h-[65px] w-[800px] bg-transparent border border-custom-grey rounded-xl mt-4 mb-5 text-xl font-normal p-4 
+              text-custom-grey
+              placeholder:text-custom-dark-grey
+
+              focus:outline-none focus:ring-1 focus:ring-custom-green focus:border-transparent
+              "
               placeholder="Enter Correct Answer"
               id="answer"
               name="answer"
@@ -146,26 +159,18 @@ const Postquestion = () => {
               onChange={handleFormData}
               required
             />
-            <label className="font-normal text-2xl">Date</label>
+            <label className="font-normal text-custom-grey text-2xl">
+              Date
+            </label>
             <DatePicker
               selected={formData.date}
               onChange={handleDateChange}
               minDate={new Date()}
               dateFormat="MMMM dd, yyyy"
-              className="h-[65px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-2xl p-4"
-              required
-            />
+              className="h-[65px] w-[800px] bg-transparent border border-custom-grey rounded-xl mt-4 mb-5 text-2xl p-4 text-custom-grey
+              placeholder:text-custom-dark-grey
 
-            <label className="font-normal text-22xl" htmlFor="time">
-              Time
-            </label>
-            <input
-              className="h-[65px] w-[800px] bg-transparent border border-white rounded-xl mt-4 mb-5 text-xl font-normal p-4 "
-              placeholder="Format: 00:00:00"
-              id="time"
-              name="time"
-              value={formData.time}
-              onChange={handleFormData}
+              focus:outline-none focus:ring-1 focus:ring-custom-green focus:border-transparent"
               required
             />
 
@@ -176,7 +181,7 @@ const Postquestion = () => {
                 ${
                   isLoading
                     ? "cursor-not-allowed opacity-50"
-                    : "hover:bg-yellow-600 hover:text-white"
+                    : "hover:bg-yellow-600"
                 }
                 `}
                 onClick={handlePost}

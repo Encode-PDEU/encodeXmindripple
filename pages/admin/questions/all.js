@@ -36,7 +36,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL
 const Allquestions = () => {
   const router = useRouter()
   const [questions, setQuestions] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (!localStorage.getItem("admin_token")) {
@@ -49,7 +49,7 @@ const Allquestions = () => {
     axios
       .get(`${API_URL}/admin/allQuestions`)
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         setQuestions(res.data)
       })
       .catch((error) => {
@@ -113,8 +113,30 @@ const Allquestions = () => {
           <div className=" flex flex-row flex-grow justify-center items-center">
             <div className=" flex flex-col items-center">
               <MoonLoader color="#ffffff" loading={isLoading} size={50} />
-              <h1 className="text-yellow-500 text-3xl font-semibold mt-4">
+              <h1 className="text-custom-yellowtext-3xl font-semibold mt-4">
                 Loading Questions...
+              </h1>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  if (questions.length == 0) {
+    return (
+      <>
+        <div className="flex flex-row">
+          <div>
+            {/* Left part */}
+            <SideNav />
+          </div>
+
+          {/* Right part */}
+          <div className=" flex flex-row flex-grow justify-center items-center">
+            <div className=" flex flex-col items-center">
+              <h1 className="text-custom-yellow text-3xl font-semibold mt-4">
+                No Questions Posted Yet
               </h1>
             </div>
           </div>
@@ -131,11 +153,11 @@ const Allquestions = () => {
       </div>
 
       {/* Right part */}
-      <div className=" flex flex-row flex-grow justify-center items-center">
-        <div className="text-center relative w-full">
+      <div className=" flex flex-row flex-grow justify-center mt-32">
+        <div className="text-center relative w-full mx-8">
           {activeRiddleIndex != 0 && (
             <button
-              className="text-white text-3xl w-[60px] h-[60px] bg-custom-161616 rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 ml-2"
+              className="text-custom-grey text-3xl w-[60px] h-[60px] bg-custom-161616 rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 ml-2"
               onClick={handlePreviousClick}
             >
               {" "}
@@ -144,15 +166,15 @@ const Allquestions = () => {
           )}
 
           <p
-            className={`${oswald.className} text-4xl font-semibold text-yellow-500`}
+            className={`${oswald.className} text-7xl font-semibold text-custom-yellow`}
           >
             ALL QUESTIONS
           </p>
-          <div className="mt-5">
-            <p className="text-green-500 font-semibold text-2xl">
+          <div className="mt-12">
+            <p className="text-custom-green font-semibold text-6xl">
               {questions[activeRiddleIndex]?.riddle_id}
             </p>
-            <p className="text-white text-3xl font-normal w-4/5 m-auto">
+            <p className="text-custom-grey text-2xl mt-10 font-normal w-4/5 m-auto">
               {questions[activeRiddleIndex]?.question}
             </p>
           </div>
@@ -166,15 +188,18 @@ const Allquestions = () => {
             </button>
           )}
 
-          <div className="flex md:flex-col flex-row md:items-center md:justify-center justify-start">
+          <div className="flex md:flex-col mt-5 flex-row md:items-center md:justify-center justify-start ">
             <div className="text-center flex flex-row md:flex-col pl-10">
               <p
                 // type="text"
                 // onChange={(e) => setUserAnswer(e.target.value)}
-                className="mt-6 text-gray-500 font-semibold text-lg text-center bg-transparent border-b border-gray-500 outline-none md:w-[502px] w-[160px]"
+                className="mt-6 text-gray-500 font-medium text-2xl text-center bg-transparent border-gray-500 outline-none md:w-[502px] w-[160px]"
                 // placeholder="Enter your answer"
               >
-                {questions[activeRiddleIndex]?.answer}
+                Answer:{" "}
+                <span className="ml-3">
+                  {questions[activeRiddleIndex]?.answer}
+                </span>
               </p>
             </div>
           </div>
