@@ -41,7 +41,7 @@ const NavBar = () => {
           <button onClick={toggleMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-yellow-500"
+              className="h-9 w-9 text-custom-yellow"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -72,8 +72,8 @@ const NavBar = () => {
                 <div
                   className={`link-style pb-6 mt-10 text-2xl ${
                     router.pathname === "/riddles"
-                      ? "text-green-500"
-                      : "text-yellow-500"
+                      ? "text-custom-green"
+                      : "text-custom-yellow"
                   }`}
                 >
                   Riddles
@@ -84,32 +84,35 @@ const NavBar = () => {
                 <div
                   className={`link-style pb-6 text-2xl ${
                     router.pathname === "/leaderboard"
-                      ? "text-green-500"
-                      : "text-yellow-500"
+                      ? "text-custom-green"
+                      : "text-custom-yellow"
                   }`}
                 >
                   Leaderboard
                 </div>
               </Link>
 
-              <Link href="/more">
+              {/* <Link href="/more">
                 <div
                   className={`link-style text-2xl ${
                     router.pathname === "/more"
-                      ? "text-green-500"
-                      : "text-yellow-500"
+                      ? "text-custom-green"
+                      : "text-custom-yellow"
                   }`}
                 >
                   More
                 </div>
-              </Link>
+              </Link> */}
             </div>
             <div
               className={`md:flex md:flex-row  md:items-center md:justify-center pb-30 ${
                 isMenuOpen ? "block" : "hidden"
               }`}
             >
-              <button className="md:border md:border-yellow-500 text-yellow-500 md:px-4 md:py-2 m-[-30px] items-center text-center rounded-lg text-2xl ">
+              <button
+                className="md:border md:border-custom-yellow text-custom-yellow md:px-4 md:py-2 m-[-30px] items-center text-center rounded-lg text-2xl "
+                onClick={handleLogOut}
+              >
                 Logout
               </button>
             </div>
@@ -118,7 +121,7 @@ const NavBar = () => {
             <button onClick={toggleMenu}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-yellow-500"
+                className="h-6 w-6 text-custom-yellow"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -136,29 +139,25 @@ const NavBar = () => {
 
         {/* Main Content */}
         <div className="flex-1">
-          <div className="flex items-center justify-between p-6">
+          <div className="flex items-center justify-between px-6 pt-8 pb-6">
             <div className="flex items-center gap-x-4">
-              <div className="flex flex-row items-center gap-x-4 md:h-[40px] md:w-[50px]">
+              <div className="flex flex-row items-end gap-x-4 md:h-[40px] md:w-[50px]">
                 <Image
                   src="/Images/mindripple_logo.png"
                   alt="MindRipple Logo"
                   width={500}
                   height={500}
-                  className="h-[40px] w-[50px]"
+                  className="h-[40px] w-[45px] md:h-[45px] md:w-[50px]"
                 />
-                <Image
-                  src="/Images/X.png"
-                  alt="x"
-                  width={500}
-                  height={500}
-                  className="h-[30px] w-[18px]"
-                />
+                <h1 className="font-bold text-2xl uppercase text-custom-yellow">
+                  x
+                </h1>
                 <Image
                   src="/Images/Encode_Logo.png"
                   alt="Encode Logo"
                   width={500}
                   height={500}
-                  className="h-[42px] w-[52px]"
+                  className="h-[37px] w-[45px] md:h-[42px] md:w-[50px]"
                 />
               </div>
             </div>
@@ -169,39 +168,39 @@ const NavBar = () => {
             >
               <Link href="/riddles">
                 <div
-                  className={`link-style text-2xl ${
+                  className={`link-style text-2xl hover ${
                     router.pathname === "/riddles"
-                      ? "text-green-500"
-                      : "text-yellow-500"
+                      ? "text-custom-green font-medium"
+                      : "text-custom-yellow hover:text-custom-green hover:duration-300"
                   }`}
                 >
                   Riddles
                 </div>
               </Link>
 
-              <Link href="/leaderboard_laptop">
+              <Link href="/leaderboard">
                 <div
                   className={`link-style text-2xl ${
-                    router.pathname === "/leaderboard_laptop"
-                      ? "text-green-500"
-                      : "text-yellow-500"
+                    router.pathname === "/leaderboard"
+                      ? "text-custom-green"
+                      : "text-custom-yellow hover:text-custom-green duration-300"
                   }`}
                 >
                   Leaderboard
                 </div>
               </Link>
 
-              <Link href="/more">
+              {/* <Link href="/more">
                 <div
                   className={`link-style text-2xl ${
                     router.pathname === "/more"
-                      ? "text-green-500"
-                      : "text-yellow-500"
+                      ? "text-custom-green"
+                      : "text-custom-yellow hover:text-custom-green"
                   }`}
                 >
                   More
                 </div>
-              </Link>
+              </Link> */}
             </div>
             <div
               className={`md:flex md:flex-row flex flex-row md:pl-8 ${
@@ -209,7 +208,7 @@ const NavBar = () => {
               }`}
             >
               <button
-                className="md:border md:border-yellow-500 text-yellow-500 md:px-4 md:py-2 items-center text-center rounded-lg text-2xl "
+                className="md:border md:border-custom-yellow text-custom-yellow md:px-4 md:py-2 items-center text-center rounded-lg text-xl "
                 onClick={handleLogOut}
               >
                 Logout

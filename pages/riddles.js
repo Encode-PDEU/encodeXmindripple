@@ -13,6 +13,7 @@ import Confetti from "react-confetti"
 // import riddlesData from "@/dummy_data/riddles"
 // import Countdown from "react-countdown"
 import CountdownTimer from "@/components/countdown"
+import { BiSolidChevronLeft, BiSolidChevronRight } from "react-icons/bi"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -51,11 +52,40 @@ const Riddles = () => {
   const [currentAnswer, setCurrentAnswer] = useState("")
   const [showMessage, setShowMessage] = useState(false)
 
-  const [riddlesData, setRiddlesData] = useState([])
+  const [riddlesData, setRiddlesData] = useState([
+    {
+      question:
+        "1st Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis?",
+      riddle_id: 67,
+      date: "2023-10-12T13:32:28.000Z",
+    },
+    {
+      question:
+        "2nd Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis?",
+      riddle_id: 68,
+      date: "2023-12-12T13:32:28.000Z",
+    },
+    {
+      question: "Eum magni dolore obc",
+      riddle_id: 69,
+      date: "2023-10-12T13:32:28.000Z",
+    },
+  ])
   console.log("Riddles data: ")
   console.log(riddlesData)
   const [isLoading, setIsLoading] = useState(false)
-  const [currentUserDetails, setCurrentUserDetails] = useState(null)
+
+  // User has not answered any question yet
+  // const [currentUserDetails, setCurrentUserDetails] = useState({
+  //   scores: 10,
+  //   solved_questions: [],
+  // })
+
+  // User has answered some questions
+  const [currentUserDetails, setCurrentUserDetails] = useState({
+    scores: 10,
+    solved_questions: ["67", "68"],
+  })
   console.log("Current user details: ")
   console.log(currentUserDetails)
   const [userToken, setUserToken] = useState(null)
@@ -85,56 +115,65 @@ const Riddles = () => {
     }
   }
 
-  const [questionsAnswered, setQuestionsAnswered] = useState([])
+  const [questionsAnswered, setQuestionsAnswered] = useState([
+    {
+      riddle_id: "67",
+      answer: "cat",
+    },
+    {
+      riddle_id: "68",
+      answer: "cat",
+    },
+  ])
   // console.log("Questions answered: ")
   // console.log(questionsAnswered)
 
-  useEffect(() => {
-    console.log("Request fired")
+  // useEffect(() => {
+  //   console.log("Request fired")
 
-    const token = JSON.parse(localStorage.getItem("token"))
-    console.log(token)
-    const user_id = token.user.id
-    // console.log(user_id)
-    setUserToken(token)
+  //   const token = JSON.parse(localStorage.getItem("token"))
+  //   console.log(token)
+  //   const user_id = token.user.id
+  //   // console.log(user_id)
+  //   setUserToken(token)
 
-    // set questions answered from localstorage
+  //   // set questions answered from localstorage
 
-    setQuestionsAnswered(
-      JSON.parse(localStorage.getItem("questions_answered")) || []
-    )
+  //   setQuestionsAnswered(
+  //     JSON.parse(localStorage.getItem("questions_answered")) || []
+  //   )
 
-    // Fetch user details
-    setIsLoading(true)
-    axios
-      .get(`${API_URL}/user/details?user_id=${user_id}`)
-      .then((res) => {
-        // console.log(res.data)
-        setCurrentUserDetails(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-        toast.error(err.response.data.message)
-      })
+  //   // Fetch user details
+  //   setIsLoading(true)
+  //   axios
+  //     .get(`${API_URL}/user/details?user_id=${user_id}`)
+  //     .then((res) => {
+  //       console.log(res.data)
+  //       setCurrentUserDetails(res.data)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       toast.error(err.response.data.message)
+  //     })
 
-    // Fetch riddles
-    axios
-      .get(`${API_URL}/riddle/question`)
-      .then((res) => {
-        // console.log(res.data)
-        setRiddlesData(res.data)
+  //   // Fetch riddles
+  //   axios
+  //     .get(`${API_URL}/riddle/question`)
+  //     .then((res) => {
+  //       // console.log(res.data)
+  //       setRiddlesData(res.data)
 
-        console.log("IMP")
-        console.log(currentUserDetails)
-      })
-      .catch((err) => {
-        console.log(err)
-        toast.error(err.response.data.message)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, [])
+  //       console.log("IMP")
+  //       console.log(currentUserDetails)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       toast.error(err.response.data.message)
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false)
+  //     })
+  // }, [])
 
   // console.log(currentUserDetails)
 
@@ -362,74 +401,106 @@ const Riddles = () => {
       {/* <div className="overflow-y-hidden">
         <Confetti height={1000} />
       </div> */}
-      <div className={` ${roboto.className} bg-matrixBlack z-999`}>
+      <div className={` ${roboto.className}`}>
         <NavBar />
-        <div className="mt-5 flex flex-col md:flex-row justify-between p-6 m-auto top-0 left-0 z-0 ">
+        <div className="flex flex-col md:flex-row justify-between px-6 m-auto md:mt-5 md:px-8">
           <p
-            className={`${oswald.className} text-yellow-600 text-3xl md:text-5xl font-semibold`}
+            className={`${oswald.className} text-custom-yellow text-3xl md:text-5xl font-semibold`}
           >
             RIDDLES N PUZZLES
           </p>
-          <div className="flex flex-row md:flex-col text-lg md:text-2xl space-x-3">
-            <p className="font-semibold  text-green-500 flex flex-row space-x-2">
-              Answered:{" "}
-              <span className="text-white flex-row pl-2">
+          <div className="mt-3 flex flex-row-reverse justify-between md:flex-col text-lg md:text-2xl md:justify-end md:px-7">
+            <p className="font-semibold  text-custom-green flex flex-row">
+              Answered:
+              <span className="text-custom-grey flex-row ml-2">
                 {currentUserDetails?.solved_questions == null
                   ? 0
                   : currentUserDetails.solved_questions.length}{" "}
                 / {riddlesData.length}
-              </span>{" "}
+              </span>
             </p>
-            <p className="font-semibold  text-green-500 flex flex-row">
+            <p className="font-semibold  text-custom-green flex flex-row md:justify-end">
               Your Score:{" "}
-              <span className="text-white flex-row ">
+              <span className="text-custom-grey flex-row ml-2">
                 {currentUserDetails?.scores}
               </span>
             </p>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center mt-6 p-6 ">
-          {activeRiddleIndex != 0 && (
-            <button
-              className="text-white text-2xl w-[150px] h-[60px] bg-custom-1E1E1E rounded-full  items-center justify-center hidden md:flex "
-              onClick={handlePreviousClick}
-            >
-              &lt;
-            </button>
-          )}
-          <div className="flex flex-col justify-normal  md:items-center md:justify-center">
-            <p className="text-green-500 font-semibold text-2xl md:text-3xl mb-4 font-roboto ">
+
+        <div className="px-6 mt-7 md:mt-12">
+          <h1 className="text-custom-green font-semibold text-3xl md:text-5xl md:text-center mb-4 font-roboto md:mb-0">
+            Active Riddle
+          </h1>
+        </div>
+        {/*  */}
+        {/*  */}
+        {/*  */}
+        {/*  */}
+        {/*  */}
+        {/*  */}
+
+        {/* Button and question */}
+        <div className="flex flex-row items-center justify-center  md:p-6 md:w-4/5 md:mx-auto">
+          <button
+            className={`text-custom-grey bg-custom-1E1E1E rounded-full  items-center justify-center   py-3 px-4 md:flex hidden hover:bg-custom-121212 duration-300
+              ${activeRiddleIndex == 0 ? "md:invisible" : ""}
+              `}
+            onClick={handlePreviousClick}
+          >
+            <BiSolidChevronLeft className="text-4xl -ml-1" />
+          </button>
+          <div
+            className="px-6 flex flex-col justify-normal  md:items-center md:justify-center
+          md:w-full
+          "
+          >
+            {/* <p className="text-green-500 font-semibold text-2xl md:text-3xl mb-4 font-roboto ">
               Active Riddle
-            </p>
-            <p className="text-white font-normal text-lg md:text-xl justify-normal  md:items-center md:justify-center w-4/5 text-[20px]">
+            </p> */}
+            <p
+              className="text-custom-grey text-justify font-normal text-lg justify-normal  md:items-center md:justify-center md:w-4/5 text-[20px] md:text-center
+            md:text-2xl
+            "
+            >
               {riddlesData[activeRiddleIndex]?.question}
             </p>
           </div>
 
-          {activeRiddleIndex != riddlesData.length - 1 && (
-            <button
-              className={`text-white text-3xl w-[150px] h-[60px] bg-custom-1E1E1E rounded-full  items-center justify-center hidden md:flex
+          <button
+            className={`text-custom-grey bg-custom-1E1E1E rounded-full  items-center justify-center hidden md:flex py-3 px-4
+
+              ${activeRiddleIndex == riddlesData.length - 1 ? "invisible" : ""}
+
               ${
                 isNextButtonDisabled
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-green-500 hover:text-black hover:font-bold duration-300"
+                  : "hover:bg-custom-121212 duration-300"
               }
               `}
-              onClick={handleNextClick}
-              disabled={isNextButtonDisabled}
-            >
-              &gt;
-            </button>
-          )}
+            onClick={handleNextClick}
+            disabled={isNextButtonDisabled}
+          >
+            <BiSolidChevronRight className="text-4xl" />
+          </button>
         </div>
-        <div className="flex md:flex-col flex-row md:items-center md:justify-center justify-start">
-          <div className="text-center flex flex-row md:flex-col pl-10">
+
+        {/*  */}
+        {/*  */}
+        {/*  */}
+        {/*  */}
+        {/*  */}
+
+        <div className="px-6 mt-5 md:mt-3 flex md:flex-col flex-row justify-between md:items-center md:justify-center gap-2 items-center sm:justify-normal">
+          <div className="text-center flex flex-row md:flex-col md:pl-10">
             {currentUserDetails?.solved_questions?.includes(
               riddlesData[activeRiddleIndex]?.riddle_id.toString()
             ) ? (
               <>
                 {questionsAnswered && (
-                  <p>Answer: {questionsAnswered[activeRiddleIndex]?.answer}</p>
+                  <p className="text-custom-grey text-2xl font-medium md:text-3xl">
+                    Answer: {questionsAnswered[activeRiddleIndex]?.answer}
+                  </p>
                 )}
               </>
             ) : (
@@ -438,13 +509,17 @@ const Riddles = () => {
                   type="text"
                   value={currentAnswer}
                   onChange={(e) => setCurrentAnswer(e.target.value)}
-                  className="mt-6 text-gray-100 font-semibold text-lg text-center bg-transparent border-b border-gray-500 outline-none md:w-[502px] w-[160px]"
+                  className="md:mt-6 text-custom-grey font-semibold text-base md:text-center bg-transparent border-b border-gray-500 outline-none md:w-[502px]
+                  placeholder:text-custom-dark-grey w-full md:text-2xl
+    
+                  "
                   placeholder="Enter your answer"
                 />
 
-                {showMessage && (
+                {/* //! TODO: Uncomment this once CSS gets finalized */}
+                {/* {showMessage && (
                   <p className="text-red-500 mt-2">Wrong answer! Try again.</p>
-                )}
+                )} */}
               </>
             )}
           </div>
@@ -454,8 +529,8 @@ const Riddles = () => {
             ) ? (
               <>
                 <button
-                  className="border flex flex-col md:flex-row border-yellow-500 text-black justify-center items-center rounded-lg  font-semibold text-2xl mt-4 ml-3 px-4 py-2
-                 opacity-70 cursor-not-allowed bg-yellow-500
+                  className="border flex flex-col md:flex-row border-yellow-500 text-black justify-center items-center rounded-md font-semibold md:text-2xl lg:mt-4 md:ml-3  px-2 py-1 md:px-3 md:mt-2
+                 opacity-50 cursor-not-allowed bg-yellow-500 text-xl
                 "
                   onClick={handleAnswerSubmission}
                   disabled={true}
@@ -465,24 +540,27 @@ const Riddles = () => {
               </>
             ) : (
               <button
-                className={`border flex flex-col md:flex-row border-green-500 text-green-500 justify-center items-center rounded-lg  font-semibold text-2xl mt-4 ml-3 px-4 py-2
+                className={`border flex flex-col md:flex-row  justify-center items-center rounded-lg  font-semibold text-lg md:text-2xl md:mt-4 md:ml-3
+                px-2 md:px-4 md:py-2 py-1 
                  ${
                    isSubmittingAnswer
-                     ? "opacity-50 cursor-not-allowed"
-                     : "hover:bg-green-500 hover:text-black hover:font-bold duration-300"
+                     ? "opacity-50 cursor-not-allowed border-custom-yellow"
+                     : "hover:bg-green-500 hover:text-black hover:font-bold duration-300 border-custom-green text-custom-green"
                  }
                  `}
                 onClick={handleAnswerSubmission}
                 disabled={isSubmittingAnswer}
               >
                 {isSubmittingAnswer ? (
-                  <div className="flex justify-center items-center px-4">
-                    <p className="mr-2 text-yellow-500">Submitting</p>
-                    <MoonLoader
-                      size={20}
-                      color={"#CA8A04"}
-                      loading={isSubmittingAnswer}
-                    />
+                  <div className="flex justify-center items-center md:px-4">
+                    <p className="md:mr-2 text-yellow-500">Submitting</p>
+                    <div className="hidden md:flex ">
+                      <MoonLoader
+                        size={20}
+                        color={"#CA8A04"}
+                        loading={isSubmittingAnswer}
+                      />
+                    </div>
                   </div>
                 ) : (
                   "Submit"
@@ -491,19 +569,33 @@ const Riddles = () => {
             )}
           </div>
         </div>
-        <div className="w-full flex justify-between p-6 md:hidden">
-          <button
-            className="w-[122px] h-[50px] font-semibold text-lg bg-gray-900 rounded-lg px-2 py-2"
-            onClick={handleNextClick}
-          >
-            Previous
-          </button>
-          <button
-            className="font-semibold text-lg bg-gray-900 rounded-lg px-2 py-2 w-[122px] h-[50px]"
-            onClick={handleNextClick}
-          >
-            Next
-          </button>
+
+        {/* Wrong answer indicator */}
+        <div className="mt-3 text-center px-6">
+          {showMessage && (
+            <p className="text-red-500 mt-2">Wrong answer! Try again.</p>
+          )}
+        </div>
+
+        {/* Button for mobile devices */}
+        <div className="w-full flex justify-between sm:justify-normal sm:gap-5 p-6 md:hidden">
+          {activeRiddleIndex != 0 && (
+            <button
+              className="w-[122px] h-[50px] text-custom-grey font-semibold text-lg bg-custom-1E1E1E rounded-lg px-2 py-2"
+              onClick={handlePreviousClick}
+            >
+              Previous
+            </button>
+          )}
+
+          {activeRiddleIndex != riddlesData.length - 1 && (
+            <button
+              className="font-semibold text-lg text-custom-grey bg-custom-1E1E1E rounded-lg px-2 py-2 w-[122px] h-[50px]"
+              onClick={handleNextClick}
+            >
+              Next
+            </button>
+          )}
         </div>
 
         {timeDifference && (

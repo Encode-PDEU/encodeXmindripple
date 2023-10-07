@@ -15,6 +15,8 @@ module.exports = {
           green: "#02A556",
           grey: "#BCBCBC",
           "dark-grey": "#565656",
+          121212: "#121212",
+          212121: "#212121",
         },
       },
       fontFamily: {
@@ -50,5 +52,5 @@ module.exports = {
     aspectRatio: ["responsive"],
   },
   // Add prettier tailwind plugin
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: [],
 }

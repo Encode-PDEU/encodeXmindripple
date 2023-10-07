@@ -78,12 +78,12 @@ const Login = () => {
         console.log(err)
 
         // If the error is 401, then the user entered the wrong credentials
-        if (err.response.status == 401) {
+        if (err.response?.status == 401) {
           toast.error("Invalid credentials. Try again", {
             position: "top-center",
           })
           return
-        } else if (err.response.status == 500) {
+        } else if (err.response?.status == 500) {
           // If the error is 500, then there was an error with the server
           toast.error("Unable to log in. Try again", {
             position: "top-center",
