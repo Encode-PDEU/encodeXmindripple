@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react"
 import axios from "axios"
 // import { ReactMatrixAnimation } from 'react-matrix-animation';
 import { MoonLoader } from "react-spinners"
+import { Oswald, Roboto } from "next/font/google"
 
 // const leaderboardData = [
 //   { name: "Preet Sojitra", points: 2500, Solved: 50 },
@@ -32,6 +33,16 @@ import { MoonLoader } from "react-spinners"
 //   { name: "Preet Sojitra", points: 2500, Solved: 30 },
 // ]
 
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+})
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+})
+
 const MobileMenu = ({ isOpen }) => {
   const router = useRouter()
   return <></>
@@ -55,7 +66,7 @@ const API_URL = "http://localhost:3000/api"
 export default function Leaderboard_laptop() {
   const [leaderboardData, setLeaderboardData] = useState([])
   const [topTen, setTopTen] = useState([])
-  const [currentUserScore, setCurrentUserScore] = useState({})
+  const [currentUserScore, setCurrentUserScore] = useState([])
   const [userEmail, setUserEmail] = useState("")
   const [isLoading, setIsLoading] = useState(true)
 
@@ -75,10 +86,16 @@ export default function Leaderboard_laptop() {
         console.log(res.data)
         setLeaderboardData(res.data.slice(0, 10))
         setTopTen(res.data.slice(0, 10))
-        setCurrentUserScore({
-          rank: res.data.findIndex((player) => player.email === email) + 1,
-          ...res.data.filter((player) => player.email === email)[0],
-        })
+        setCurrentUserScore([
+          {
+            rank: res.data.findIndex((player) => player.email === email) + 1,
+            ...res.data.filter((player) => player.email === email)[0],
+          },
+        ])
+        // console.log({
+        //   rank: res.data.findIndex((player) => player.email === email) + 1,
+        //   ...res.data.filter((player) => player.email === email)[0],
+        // })
       })
       .catch((err) => {
         console.log(err)
@@ -88,13 +105,13 @@ export default function Leaderboard_laptop() {
       })
   }, [])
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <div className="relative">
-      {isMobileMenuOpen ? null : <NavBar />}
+    <div className="pb-20">
+      <NavBar />
       <h1
-        className={`font-oswald font-semibold text-4xl md:text-6xl text-custom-yellow pl-4 md:pl-[40px] md:pt-[56px] md:pb-[56px] pt-4'} pb-4 md:pb-56`}
+        className={`${oswald.className} font-semibold text-4xl md:text-6xl text-custom-yellow pl-4 md:pl-[40px] md:pt-[56px] md:pb-[25px] pt-4 pb-2`}
       >
         LEADERBOARD
       </h1>
@@ -105,14 +122,18 @@ export default function Leaderboard_laptop() {
           </div>
         ) : (
           <>
-            <div className="w-full px-4 md:px-10">
-              <table className="w-full border border-black">
+            <div className="w-full px-2 md:px-10">
+              <table
+                className="w-full
+              border-spacing-y-2 border-separate
+              "
+              >
                 <thead>
-                  <tr className="font-roboto md:text-2xl font-semibold text-center">
-                    <th className="p-3 tracking-wide">Rank</th>
-                    <th className="p-3 tracking-wide">Name</th>
-                    <th className="p-3 tracking-wide">Points</th>
-                    <th className="p-3 tracking-wide">Solved</th>
+                  <tr className="text-base md:text-2xl font-semibold text-center text-custom-grey">
+                    <th className="p-3">Rank</th>
+                    <th className="p-3">Name</th>
+                    <th className="p-3">Points</th>
+                    <th className="p-3">Solved</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -120,14 +141,16 @@ export default function Leaderboard_laptop() {
                     <tr
                       key={index}
                       className={`${
-                        index % 2 === 0 ? "bg-custom rounded" : "bg-black"
-                      } text-white`}
+                        index % 2 === 0
+                          ? "bg-custom-0F0F0F border rounded-md"
+                          : "bg-transparent"
+                      }`}
                     >
                       <td
-                        className={`px-3 tracking-wide  font-roboto md:text-2xl font-medium rounded-s-lg p-4 align-middle text-center 
+                        className={`md:text-2xl  align-middle text-center 
                 ${
                   userEmail === player.email
-                    ? "text-yellow-500"
+                    ? "text-custom-yellow"
                     : "text-custom-green"
                 }
                 `}
@@ -135,10 +158,10 @@ export default function Leaderboard_laptop() {
                         {index + 1}
                       </td>
                       <td
-                        className={`px-3 tracking-wide  font-roboto md:text-2xl font-medium max-w-[200px] align-middle text-center
+                        className={`px-3 tracking-wide  font-roboto md:text-2xl font-medium max-w-[200px] align-middle text-center py-2
                 ${
                   userEmail === player.email
-                    ? "text-yellow-500"
+                    ? "text-custom-yellow"
                     : "text-custom-green"
                 }
                 `}
@@ -149,7 +172,7 @@ export default function Leaderboard_laptop() {
                         className={`px-3 tracking-wide  font-roboto md:text-2xl font-medium align-middle text-center
                 ${
                   userEmail === player.email
-                    ? "text-yellow-500"
+                    ? "text-custom-yellow"
                     : "text-custom-green"
                 }
                 `}
@@ -160,10 +183,9 @@ export default function Leaderboard_laptop() {
                         className={`px-3  tracking-wide font-roboto md:text-2xl font-medium align-middle text-center
                   ${
                     userEmail === player.email
-                      ? "text-yellow-500"
+                      ? "text-custom-yellow"
                       : "text-custom-green"
-                  }
-                  ${index % 2 === 0 ? "rounded-r-lg" : "rounded-s-lg"}`}
+                  } `}
                       >
                         {player.solved_questions?.length}
                       </td>
@@ -174,17 +196,49 @@ export default function Leaderboard_laptop() {
             </div>
             {/* Participant in sticky bar*/}
 
-            {currentUserScore.rank > 10 && (
-              <div className="fixed bottom-0 w-full">
-                <div className="bg-custom p-3 md:p-5">
+            {currentUserScore[0].rank > 10 && (
+              <div className="fixed bottom-0 w-full px-2 md:px-10">
+                <div className="mb-4">
                   <div
-                    className="p-2 md:p-4 md:flex md:flex-row md:items-center justify-between 
+                    className="py-2 md:flex md:flex-row md:items-center justify-between 
                bg-custom-161616"
-                    // className={`p-2 md:p-4 md:flex md:flex-row md:items-center justify-between ${
-                    //   index % 2 === 0 ? "bg-custom-161616" : "bg-black"
-                    // }`}
                   >
-                    <span className="text-custom-green font-roboto md:text-2xl font-medium text-center">
+                    <table className="w-full">
+                      <tbody>
+                        <tr>
+                          {currentUserScore.map((player, index) => (
+                            <>
+                              <td
+                                key={index}
+                                className="text-custom-green font-roboto md:text-2xl font-medium text-center align-middle px-4 lg:px-[10px]"
+                              >
+                                {player.rank}
+                              </td>
+                              <td
+                                className="text-custom-green font-roboto md:text-2xl font-medium text-center px-3
+                              lg:px-3 w-[40%]
+                              "
+                              >
+                                {/* {player.name} */}
+                                Preet Sojitra
+                              </td>
+                              <td
+                                className="text-custom-green tracking-wide font-roboto md:text-2xl font-medium text-center 
+                             px-[14px] lg:px-1
+                              "
+                              >
+                                {player.scores}
+                              </td>
+                              <td className="text-custom-green tracking-wide font-roboto md:text-2xl font-medium text-center px-3 lg:px-[14px] ">
+                                {player.solved_questions?.length}
+                              </td>
+                            </>
+                          ))}
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    {/* <span className="text-custom-green font-roboto md:text-2xl font-medium text-center">
                       {currentUserScore.rank}
                     </span>
                     <span className="tracking-wide text-custom-green font-roboto md:text-2xl font-medium max-w-[200px] text-center">
@@ -200,7 +254,7 @@ export default function Leaderboard_laptop() {
                       // }`}
                     >
                       {currentUserScore.solved_questions?.length}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
               </div>

@@ -52,25 +52,7 @@ const Riddles = () => {
   const [currentAnswer, setCurrentAnswer] = useState("")
   const [showMessage, setShowMessage] = useState(false)
 
-  const [riddlesData, setRiddlesData] = useState([
-    {
-      question:
-        "1st Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis?",
-      riddle_id: 67,
-      date: "2023-10-12T13:32:28.000Z",
-    },
-    {
-      question:
-        "2nd Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis?",
-      riddle_id: 68,
-      date: "2023-12-12T13:32:28.000Z",
-    },
-    {
-      question: "Eum magni dolore obc",
-      riddle_id: 69,
-      date: "2023-10-12T13:32:28.000Z",
-    },
-  ])
+  const [riddlesData, setRiddlesData] = useState([])
   console.log("Riddles data: ")
   console.log(riddlesData)
   const [isLoading, setIsLoading] = useState(false)
@@ -82,10 +64,7 @@ const Riddles = () => {
   // })
 
   // User has answered some questions
-  const [currentUserDetails, setCurrentUserDetails] = useState({
-    scores: 10,
-    solved_questions: ["67", "68"],
-  })
+  const [currentUserDetails, setCurrentUserDetails] = useState({})
   console.log("Current user details: ")
   console.log(currentUserDetails)
   const [userToken, setUserToken] = useState(null)
@@ -115,65 +94,56 @@ const Riddles = () => {
     }
   }
 
-  const [questionsAnswered, setQuestionsAnswered] = useState([
-    {
-      riddle_id: "67",
-      answer: "cat",
-    },
-    {
-      riddle_id: "68",
-      answer: "cat",
-    },
-  ])
+  const [questionsAnswered, setQuestionsAnswered] = useState([])
   // console.log("Questions answered: ")
   // console.log(questionsAnswered)
 
-  // useEffect(() => {
-  //   console.log("Request fired")
+  useEffect(() => {
+    console.log("Request fired")
 
-  //   const token = JSON.parse(localStorage.getItem("token"))
-  //   console.log(token)
-  //   const user_id = token.user.id
-  //   // console.log(user_id)
-  //   setUserToken(token)
+    const token = JSON.parse(localStorage.getItem("token"))
+    console.log(token)
+    const user_id = token.user.id
+    // console.log(user_id)
+    setUserToken(token)
 
-  //   // set questions answered from localstorage
+    // set questions answered from localstorage
 
-  //   setQuestionsAnswered(
-  //     JSON.parse(localStorage.getItem("questions_answered")) || []
-  //   )
+    setQuestionsAnswered(
+      JSON.parse(localStorage.getItem("questions_answered")) || []
+    )
 
-  //   // Fetch user details
-  //   setIsLoading(true)
-  //   axios
-  //     .get(`${API_URL}/user/details?user_id=${user_id}`)
-  //     .then((res) => {
-  //       console.log(res.data)
-  //       setCurrentUserDetails(res.data)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       toast.error(err.response.data.message)
-  //     })
+    // Fetch user details
+    setIsLoading(true)
+    axios
+      .get(`${API_URL}/user/details?user_id=${user_id}`)
+      .then((res) => {
+        console.log(res.data)
+        setCurrentUserDetails(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error(err.response.data.message)
+      })
 
-  //   // Fetch riddles
-  //   axios
-  //     .get(`${API_URL}/riddle/question`)
-  //     .then((res) => {
-  //       // console.log(res.data)
-  //       setRiddlesData(res.data)
+    // Fetch riddles
+    axios
+      .get(`${API_URL}/riddle/question`)
+      .then((res) => {
+        // console.log(res.data)
+        setRiddlesData(res.data)
 
-  //       console.log("IMP")
-  //       console.log(currentUserDetails)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       toast.error(err.response.data.message)
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false)
-  //     })
-  // }, [])
+        console.log("IMP")
+        console.log(currentUserDetails)
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error(err.response.data.message)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [])
 
   // console.log(currentUserDetails)
 

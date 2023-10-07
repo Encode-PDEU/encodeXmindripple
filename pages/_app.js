@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter()
 
   return (
-    <main className={`${oswald.className} ${roboto.className}`}>
+    <main className={`${roboto.className}`}>
       <div className="relative overflow-x-hidden h-screen">
         <div className="fixed top-0 left-0 z-0 pointer-events-none w-screen opacity-20 h-screen">
           <ReactMatrixAnimation

@@ -182,7 +182,7 @@ const NavBar = () => {
                 <div
                   className={`link-style text-2xl ${
                     router.pathname === "/leaderboard"
-                      ? "text-custom-green"
+                      ? "text-custom-green font-medium"
                       : "text-custom-yellow hover:text-custom-green duration-300"
                   }`}
                 >
