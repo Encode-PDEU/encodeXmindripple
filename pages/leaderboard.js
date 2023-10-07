@@ -68,7 +68,7 @@ export default function Leaderboard_laptop() {
   const [topTen, setTopTen] = useState([])
   const [currentUserScore, setCurrentUserScore] = useState([])
   const [userEmail, setUserEmail] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"))
@@ -79,7 +79,7 @@ export default function Leaderboard_laptop() {
 
     setUserEmail(email)
 
-    // setIsLoading(true)
+    setIsLoading(true)
     axios
       .get(`${API_URL}/leaderboard/all`)
       .then((res) => {
@@ -104,6 +104,40 @@ export default function Leaderboard_laptop() {
         setIsLoading(false)
       })
   }, [])
+
+  if (isLoading) {
+    return (
+      <div className={` ${roboto.className} bg-matrixBlack z-999`}>
+        <NavBar />
+        <div className="h-[80vh] w-full flex flex-col items-center justify-center">
+          <MoonLoader color="#ffffff" size={70} />
+          <h1 className="text-yellow-500 text-2xl font-semibold ml-2 mt-4">
+            Loading...
+          </h1>
+        </div>
+      </div>
+    )
+  }
+
+  if (leaderboardData.length === 0) {
+    return (
+      <div className="pb-20">
+        <NavBar />
+
+        <h1
+          className={`${oswald.className} font-semibold text-4xl md:text-6xl text-custom-yellow pl-4 md:pl-[40px] md:pt-[56px] md:pb-[25px] pt-4 pb-2`}
+        >
+          LEADERBOARD
+        </h1>
+
+        <div className="h-[50vh] w-full flex flex-col items-center justify-center">
+          <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4">
+            No Data Found
+          </h1>
+        </div>
+      </div>
+    )
+  }
 
   // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
