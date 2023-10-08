@@ -21,10 +21,20 @@ export default async function handler(req, res) {
         user_email: req.query.email,
         question_id: req.query.riddle_id,
       })
+
+      const { data: details, error: details_error } = await supabase.rpc(
+        "append_to_detail_score",
+        {
+          user_email: req.query.email,
+          score: req.query.score,
+          riddle_id: req.query.riddle_id,
+        }
+      )
+
       // console.log("Correct answer")
       // console.log(typeof req.query.score)
-      if (error) {
-        console.log(error)
+      if (error || details_error) {
+        console.log(error || details_error)
         return res.status(500).json("Unable to add to table")
       }
       const { data: score_data, error: score_error } = await supabase.rpc(

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useRouter } from "next/router" // Import the useRouter hook
-import Login from "./login"
-import { ReactMatrixAnimation } from "react-matrix-animation"
 import { Oswald, Roboto } from "next/font/google"
 import Image from "next/image"
 const oswald = Oswald({
@@ -15,16 +13,13 @@ const roboto = Roboto({
 })
 
 export default function App() {
-  // const [showLogin, setShowLogin] = useState(false)
   const router = useRouter() // Initialize the useRouter hook
 
   useEffect(() => {
     const token = localStorage.getItem("token")
 
-    // Delay for 3 seconds before showing the login page
+    // Delay for 3 seconds before redirecting to the login page
     const timer = setTimeout(() => {
-      // setShowLogin(true)
-
       if (token) {
         router.replace("/riddles")
       } else {
@@ -39,7 +34,6 @@ export default function App() {
     <div
       className={` ${roboto.className} flex h-screen flex-col justify-center items-center space-y-10 md:space-y-12`}
     >
-      {/* <ReactMatrixAnimation /> */}
       <div className="flex flex-row items-center flex-wrap gap-x-4 justify-center">
         <Image
           src="/Images/mindripple_logo.png"
@@ -58,13 +52,11 @@ export default function App() {
           width={500}
           height={500}
           className="h-20 w-28 sm:h-[120px] sm:w-[150px]"
-          // className="md:h-[120px] md:w-[150px]"
         />
       </div>
       <div
         className={`${oswald.className} flex flex-row font-semibold text-5xl sm:text-7xl `}
       >
-        {/* Use different font size for mobile and larger screens */}
         <p className="text-green-500">Surf</p>
         <p className="text-yellow-500">Quest</p>
         <p className="text-green-500 gap-x-2"> 1.0</p>
@@ -73,12 +65,7 @@ export default function App() {
         <p className="text-custom-grey font-semibold text-3xl sm:text-5xl mb-5 font-roboto">
           MindRipple X Encode
         </p>
-        {/* Use different font size for mobile and larger screens */}
       </div>
-      {/* <div> */}
-      {/* {showLogin && <Login />}{" "} */}
-      {/* /* Render the LoginPage component if showLogin is true */}
-      {/* </div>  */}
     </div>
   )
 }

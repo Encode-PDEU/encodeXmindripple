@@ -1,37 +1,10 @@
 import React, { useState, useEffect } from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import NavBar from "../components/navbar"
-import { getSession } from "next-auth/react"
 import axios from "axios"
-// import { ReactMatrixAnimation } from 'react-matrix-animation';
 import { MoonLoader } from "react-spinners"
 import { Oswald, Roboto } from "next/font/google"
-
-// const leaderboardData = [
-//   { name: "Preet Sojitra", points: 2500, Solved: 50 },
-//   { name: "Preet Sojitra", points: 2550, Solved: 45 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 40 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 35 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-//   { name: "Preet Sojitra", points: 2500, Solved: 30 },
-// ]
+import { useRouter } from "next/router"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -43,29 +16,13 @@ const roboto = Roboto({
   weight: ["400", "500", "700"],
 })
 
-const MobileMenu = ({ isOpen }) => {
-  const router = useRouter()
-  return <></>
-}
-
-// export async function getServerSideProps(context) {
-//   const session = await getSession(context)
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     }
-//   }
-// }
-
 const API_URL = "http://localhost:3000/api"
 
 export default function Leaderboard_laptop() {
+  const router = useRouter()
+
   const [leaderboardData, setLeaderboardData] = useState([])
-  const [topTen, setTopTen] = useState([])
+  // const [topTen, setTopTen] = useState([])
   const [currentUserScore, setCurrentUserScore] = useState([])
   const [userEmail, setUserEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -74,16 +31,21 @@ export default function Leaderboard_laptop() {
     const token = JSON.parse(localStorage.getItem("token"))
     console.log(token)
 
-    const email = token.user.email
-    console.log(email)
+    if (!token) {
+      router.replace("/login")
+      return
+    }
 
+    const email = token.user.email
+    // console.log(email)
     setUserEmail(email)
 
     setIsLoading(true)
+
     axios
       .get(`${API_URL}/leaderboard/all`)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setLeaderboardData(res.data.slice(0, 10))
         setTopTen(res.data.slice(0, 10))
         setCurrentUserScore([
@@ -138,8 +100,6 @@ export default function Leaderboard_laptop() {
       </div>
     )
   }
-
-  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
     <div className="pb-20">
@@ -228,8 +188,8 @@ export default function Leaderboard_laptop() {
                 </tbody>
               </table>
             </div>
-            {/* Participant in sticky bar*/}
 
+            {/* Participant in sticky bar*/}
             {currentUserScore[0].rank > 10 && (
               <div className="fixed bottom-0 w-full px-2 md:px-10">
                 <div className="mb-4">
@@ -253,8 +213,7 @@ export default function Leaderboard_laptop() {
                               lg:px-3 w-[40%]
                               "
                               >
-                                {/* {player.name} */}
-                                Preet Sojitra
+                                {player.name}
                               </td>
                               <td
                                 className="text-custom-green tracking-wide font-roboto md:text-2xl font-medium text-center 

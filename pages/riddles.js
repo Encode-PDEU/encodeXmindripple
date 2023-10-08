@@ -1,19 +1,15 @@
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState } from "react"
 import React from "react"
-import { getSession } from "next-auth/react"
 import NavBar from "../components/navbar"
-import { ReactMatrixAnimation } from "react-matrix-animation"
 import { Oswald, Roboto } from "next/font/google"
 import axios from "axios"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { MoonLoader } from "react-spinners"
-// import { supabaseAuthAdmin } from "@/lib/supabaseAuthAdmin"
 import Confetti from "react-confetti"
-// import riddlesData from "@/dummy_data/riddles"
-// import Countdown from "react-countdown"
 import CountdownTimer from "@/components/countdown"
 import { BiSolidChevronLeft, BiSolidChevronRight } from "react-icons/bi"
+import { useRouter } from "next/router"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -27,35 +23,24 @@ const roboto = Roboto({
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
-// export async function getServerSideProps(context) {
-//   const session = await getSession(context)
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     }
-//   }
-// }
-
 const MemoizedCountdownTimer = React.memo(CountdownTimer)
 
 const Riddles = () => {
-  console.log(
-    "----------------------------------------------------------------"
-  )
+  const router = useRouter()
+  // console.log(
+  //   "----------------------------------------------------------------"
+  // )
   const [activeRiddleIndex, setActiveRiddleIndex] = useState(0)
-  console.log("Active riddle index: ", activeRiddleIndex)
-  // const [userAnswer, setUserAnswer] = useState("")
+  // console.log("Active riddle index: ", activeRiddleIndex)
   const [currentAnswer, setCurrentAnswer] = useState("")
   const [showMessage, setShowMessage] = useState(false)
 
   const [riddlesData, setRiddlesData] = useState([])
-  console.log("Riddles data: ")
-  console.log(riddlesData)
+  // console.log("Riddles data: ")
+  // console.log(riddlesData)
   const [isLoading, setIsLoading] = useState(false)
+  const [timeDifference, setTimeDifference] = useState(null)
+  // console.log("Time difference: ", timeDifference)
 
   // User has not answered any question yet
   // const [currentUserDetails, setCurrentUserDetails] = useState({
@@ -63,18 +48,15 @@ const Riddles = () => {
   //   solved_questions: [],
   // })
 
-  // User has answered some questions
   const [currentUserDetails, setCurrentUserDetails] = useState({})
-  console.log("Current user details: ")
-  console.log(currentUserDetails)
+  // console.log("Current user details: ")
+  // console.log(currentUserDetails)
   const [userToken, setUserToken] = useState(null)
 
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true)
-  console.log("Is next button disabled: ", isNextButtonDisabled)
+  // console.log("Is next button disabled: ", isNextButtonDisabled)
 
   const checkNextButtonDisabled = () => {
-    // TODO: Enable next button only if the user has answered the current riddle
-
     // If current riddle index is in the solved questions array of the user, then it means that the user has answered the current riddle => enable next button
 
     // console.log("IMP")
@@ -83,13 +65,14 @@ const Riddles = () => {
 
     if (
       currentUserDetails?.solved_questions?.includes(
-        riddlesData[activeRiddleIndex]?.riddle_id.toString() // need to convert to string because the solved_questions array contains string values
+        riddlesData[activeRiddleIndex]?.riddle_id.toString() && // need to convert to string because the solved_questions array contains string values
+          timeDifference == 0
       )
     ) {
-      console.log("Current riddle is answered")
+      // console.log("Current riddle is answered")
       setIsNextButtonDisabled(false)
     } else {
-      console.log("Current riddle is not answered")
+      // console.log("Current riddle is not answered")
       setIsNextButtonDisabled(true)
     }
   }
@@ -99,10 +82,16 @@ const Riddles = () => {
   // console.log(questionsAnswered)
 
   useEffect(() => {
-    console.log("Request fired")
+    // console.log("Request fired")
 
     const token = JSON.parse(localStorage.getItem("token"))
-    console.log(token)
+    // console.log(token)
+
+    if (!token) {
+      router.replace("/login")
+      return
+    }
+
     const user_id = token.user.id
     // console.log(user_id)
     setUserToken(token)
@@ -118,7 +107,7 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/user/details?user_id=${user_id}`)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setCurrentUserDetails(res.data)
       })
       .catch((err) => {
@@ -130,7 +119,7 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/riddle/question`)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setRiddlesData(res.data)
 
         console.log("IMP")
@@ -147,28 +136,19 @@ const Riddles = () => {
 
   // console.log(currentUserDetails)
 
+  const [showConfetti, setShowConfetti] = useState(false)
+
   const handlePreviousClick = () => {
     setActiveRiddleIndex((prevIndex) => Math.max(prevIndex - 1, 0))
-    // setUserAnswer("")
-    // setShowMessage(false)
+
+    setShowConfetti(false)
   }
 
   const handleNextClick = () => {
-    // if (
-    //   userAnswer.toLowerCase() ===
-    //   riddlesData[activeRiddleIndex].answer.toLowerCase()
-    // ) {
-    //   setActiveRiddleIndex((prevIndex) =>
-    //     Math.min(prevIndex + 1, riddlesData.length - 1)
-    //   )
-    //   setUserAnswer("")
-    //   // setShowMessage(false)
-    // } else {
-    //   // setShowMessage(true)
-    // }
     setActiveRiddleIndex((prevIndex) =>
       Math.min(prevIndex + 1, riddlesData.length - 1)
     )
+    setShowConfetti(false)
   }
 
   // check button disabled or not for every question
@@ -194,55 +174,55 @@ const Riddles = () => {
 
     // Time difference in milliseconds
     const time_difference = Math.abs(todays_date - riddle_date)
-    console.log("Time difference: ", time_difference)
+    // console.log("Time difference: ", time_difference)
 
     // Convert time difference to days
     let time_difference_in_days = Math.floor(
       time_difference / (1000 * 3600 * 24)
     )
-    console.log("Time difference in days: ", time_difference_in_days)
+    // console.log("Time difference in days: ", time_difference_in_days)
 
     let scoreDeduction = 0
 
-    // TODO: Just finalise the score deduction logic after discussion from mind ripple
-    if (time_difference_in_days > 10) {
-      console.log("Score deduction: ", 8)
-      // setScoreDeduction(8)
-      scoreDeduction = 8
-    } else if (time_difference_in_days > 8) {
-      console.log("Score deduction: ", 6)
-      // setScoreDeduction(6)
-      scoreDeduction = 6
-    } else if (time_difference_in_days > 6) {
-      console.log("Score deduction: ", 4)
-      // setScoreDeduction(4)
-      scoreDeduction = 4
-    } else if (time_difference_in_days > 4) {
-      console.log("Score deduction: ", 2)
-      // setScoreDeduction(2)
+    if (time_difference_in_days < 5) {
+      // console.log("Score deduction: ", 0)
+      scoreDeduction = 0
+    } else if (time_difference_in_days < 10) {
+      // console.log("Score deduction: ", 2)
       scoreDeduction = 2
-    } else if (time_difference_in_days > 0) {
-      console.log("Score deduction: ", 1)
-      // setScoreDeduction(1)
-      scoreDeduction = 1
+    } else if (time_difference_in_days < 14) {
+      // console.log("Score deduction: ", 4)
+      scoreDeduction = 4
+    } else if (time_difference_in_days < 20) {
+      // console.log("Score deduction: ", 6)
+      scoreDeduction = 6
+    } else {
+      // console.log("Score deduction: ", 8)
+      scoreDeduction = 8
     }
 
     const final_score = availabeScore - scoreDeduction
-    console.log("Final score: ", final_score)
+    // console.log("Final score: ", final_score)
 
     return final_score
   }
 
-  const [timeDifference, setTimeDifference] = useState(null)
-  console.log("Time difference: ", timeDifference)
   // calculate time difference between current date and next riddle date
   const calculateTimeDifference = () => {
-    const current_riddle = riddlesData[activeRiddleIndex]
+    // console.log(riddlesData.length)
+
+    if (activeRiddleIndex == riddlesData.length - 1) {
+      // console.log("No next riddle")
+      return null
+    }
+
+    const next_riddle = riddlesData[activeRiddleIndex + 1]
+    console.log("Next riddle: ", next_riddle)
 
     const todays_date = new Date()
     todays_date.setHours(0, 0, 0, 0)
 
-    const riddle_date = new Date(current_riddle?.date)
+    const riddle_date = new Date(next_riddle?.date)
     riddle_date.setHours(0, 0, 0, 0)
 
     // Time difference in milliseconds
@@ -252,13 +232,22 @@ const Riddles = () => {
   }
 
   useEffect(() => {
-    console.log("Active riddle index changed")
+    // console.log("Active riddle index changed")
     const time_difference = calculateTimeDifference()
 
     setTimeDifference(time_difference)
   }, [activeRiddleIndex, riddlesData])
 
   const [isSubmittingAnswer, setIsSubmittingAnswer] = useState(false)
+
+  // Hide react confetti after 5 seconds
+  useEffect(() => {
+    if (showConfetti) {
+      setTimeout(() => {
+        setShowConfetti(false)
+      }, 7000)
+    }
+  }, [showConfetti])
 
   const handleAnswerSubmission = () => {
     // console.log("All riddles: ")
@@ -277,7 +266,7 @@ const Riddles = () => {
     }
 
     const final_score = calculateScore()
-    console.log("Score: ", final_score)
+    // console.log("Score: ", final_score)
 
     // Fire request to backend to check answer
     setIsSubmittingAnswer(true)
@@ -286,7 +275,7 @@ const Riddles = () => {
         `${API_URL}/riddle/checkanswer?riddle_id=${riddlesData[activeRiddleIndex].riddle_id}&answer=${currentAnswer}&score=${final_score}&email=${userToken.user.email}`
       )
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         toast.success(res.data.msg)
 
         // Increment user score
@@ -309,8 +298,8 @@ const Riddles = () => {
           },
         ]
 
-        console.log("Questions answered local: ")
-        console.log(questions_answered_local)
+        // console.log("Questions answered local: ")
+        // console.log(questions_answered_local)
 
         // Set questions answered
         setQuestionsAnswered(questions_answered_local)
@@ -321,19 +310,22 @@ const Riddles = () => {
           JSON.stringify(questions_answered_local)
         )
 
-        console.log("Next button should be enabled now")
+        // console.log("Next button should be enabled now")
         // Enable next button
         setIsNextButtonDisabled(false)
 
         setCurrentAnswer("")
 
         // Increment active riddle index
-        setActiveRiddleIndex((prevIndex) =>
-          Math.min(prevIndex + 1, riddlesData.length - 1)
-        )
+        // setActiveRiddleIndex((prevIndex) =>
+        //   Math.min(prevIndex + 1, riddlesData.length - 1)
+        // )
 
         // set time difference for next riddle
-        setTimeDifference(0)
+        // setTimeDifference(0)
+
+        // Show confetti
+        setShowConfetti(true)
       })
       .catch((err) => {
         console.log(err)
@@ -381,9 +373,7 @@ const Riddles = () => {
 
   return (
     <>
-      {/* <div className="overflow-y-hidden">
-        <Confetti height={1000} />
-      </div> */}
+      {showConfetti && <Confetti />}
       <div className={` ${roboto.className}`}>
         <NavBar />
         <div className="flex flex-col md:flex-row justify-between px-6 m-auto md:mt-5 md:px-8">
@@ -416,12 +406,6 @@ const Riddles = () => {
             Active Riddle
           </h1>
         </div>
-        {/*  */}
-        {/*  */}
-        {/*  */}
-        {/*  */}
-        {/*  */}
-        {/*  */}
 
         {/* Button and question */}
         <div className="flex flex-row items-center justify-center  md:p-6 md:w-4/5 md:mx-auto">
@@ -438,9 +422,6 @@ const Riddles = () => {
           md:w-full
           "
           >
-            {/* <p className="text-green-500 font-semibold text-2xl md:text-3xl mb-4 font-roboto ">
-              Active Riddle
-            </p> */}
             <p
               className="text-custom-grey text-justify font-normal text-lg justify-normal  md:items-center md:justify-center md:w-4/5 text-[20px] md:text-center
             md:text-2xl
@@ -468,12 +449,6 @@ const Riddles = () => {
           </button>
         </div>
 
-        {/*  */}
-        {/*  */}
-        {/*  */}
-        {/*  */}
-        {/*  */}
-
         <div className="px-6 mt-5 md:mt-3 flex md:flex-col flex-row justify-between md:items-center md:justify-center gap-2 items-center sm:justify-normal">
           <div className="text-center flex flex-row md:flex-col md:pl-10">
             {currentUserDetails?.solved_questions?.includes(
@@ -498,11 +473,6 @@ const Riddles = () => {
                   "
                   placeholder="Enter your answer"
                 />
-
-                {/* //! TODO: Uncomment this once CSS gets finalized */}
-                {/* {showMessage && (
-                  <p className="text-red-500 mt-2">Wrong answer! Try again.</p>
-                )} */}
               </>
             )}
           </div>

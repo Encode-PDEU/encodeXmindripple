@@ -1,14 +1,9 @@
 import "@/styles/globals.css"
 import { ReactMatrixAnimation } from "react-matrix-animation"
-import { Oswald, Roboto } from "next/font/google"
+import { Roboto } from "next/font/google"
 import { ToastContainer } from "react-toastify"
 import { useRouter } from "next/router"
 import NextjsTransition from "nextjs-page-transitions"
-
-const oswald = Oswald({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-})
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -150,7 +145,6 @@ export default function App({ Component, pageProps }) {
               <Component {...pageProps} />
             </NextjsTransition>
           </div>
-          {/* <Component {...pageProps} /> */}
         </div>
       </div>
     </main>

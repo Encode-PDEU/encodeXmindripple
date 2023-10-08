@@ -1,12 +1,10 @@
-import React, { useState, useEffect, CSSProperties } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import Logos from "@/components/logos"
-// import Layout from "../app/layout"
-import { ReactMatrixAnimation } from "react-matrix-animation"
 import { Oswald, Roboto } from "next/font/google"
 import axios from "axios"
 import Link from "next/link"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { MoonLoader } from "react-spinners"
 import Image from "next/image"
@@ -25,26 +23,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
 const Login = () => {
   const router = useRouter()
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Check if the window is resized
-  useEffect(() => {
-    // Check if the window width is less than a certain value (e.g., 768 for mobile)
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 748)
-    }
-
-    // Initial check
-    checkIsMobile()
-
-    // Add a listener for window resize
-    window.addEventListener("resize", checkIsMobile)
-
-    // Clean up the listener when the component is unmounted
-    return () => {
-      window.removeEventListener("resize", checkIsMobile)
-    }
-  }, [])
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -101,7 +79,6 @@ const Login = () => {
       <div
         className={` ${roboto.className} flex lg:h-screen flex-col space-y-8 align-middle justify-center mt-8 lg:mt-0`}
       >
-        {/* {isMobile && <ReactMatrixAnimation />} */}
         <div className="flex flex-col lg:flex-row min-h-screen">
           <div className="lg:w-[45%]  px-6 pt-8 lg:pt-0">
             {/* Below div is only for mobile screens */}
@@ -126,7 +103,6 @@ const Login = () => {
             </div>
 
             {/* For desktop screens */}
-
             <Logos />
           </div>
           <div className="lg:w-[55%] lg:bg-custom-161616 lg:h-screen">

@@ -1,11 +1,10 @@
 import Link from "next/link"
 import axios from "axios"
-import { ReactMatrixAnimation } from "react-matrix-animation"
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import Logos from "@/components/logos"
 import { Oswald, Roboto } from "next/font/google"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { MoonLoader } from "react-spinners"
 import Image from "next/image"
@@ -24,7 +23,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const Signup = () => {
   const router = useRouter()
-  const [isMobile, setIsMobile] = useState(false)
 
   // For checking if the window is resized
   useEffect(() => {
@@ -32,22 +30,7 @@ const Signup = () => {
     if (localStorage.getItem("token")) {
       router.replace("/riddles")
     }
-
-    // Check if the window width is less than a certain value (e.g., 768 for mobile)
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 748)
-    }
-
-    // Initial check
-    checkIsMobile()
-
-    // Add a listener for window resize
-    window.addEventListener("resize", checkIsMobile)
-
-    // Clean up the listener when the component is unmounted
-    return () => {
-      window.removeEventListener("resize", checkIsMobile)
-    }
+    // }
   }, [])
 
   const [formData, setFormData] = useState({
@@ -81,7 +64,7 @@ const Signup = () => {
     axios
       .post(`${API_URL}/user/signup`, formData)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         localStorage.setItem("token", JSON.stringify(res.data))
         toast.success("Signup  Successfull !!", {
           position: "bottom-right",
@@ -104,10 +87,6 @@ const Signup = () => {
       <div
         className={` ${roboto.className} flex flex-col lg:flex-row h-full mt-8 lg:mt-0`}
       >
-        {/* <div className="md:w-[50%] bg-black p-6">
-          <Logos />
-        </div> */}
-
         <div className="lg:w-[45%]  px-6 pt-8 lg:pt-0">
           {/* Below div is only for mobile screens */}
           <div className="flex flex-row items-end flex-wrap gap-x-4 justify-center lg:hidden">
@@ -131,7 +110,6 @@ const Signup = () => {
           </div>
 
           {/* For desktop screens */}
-
           <Logos />
         </div>
 

@@ -27,6 +27,15 @@ const Login = () => {
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 
+  useEffect(() => {
+    const admin_token = JSON.parse(localStorage.getItem("admin_token"))
+
+    if (admin_token) {
+      router.replace("/admin/questions/all")
+      return
+    }
+  }, [])
+
   // Check if the window is resized
   // useEffect(() => {
   //   // Check if the window width is less than a certain value (e.g., 768 for mobile)
