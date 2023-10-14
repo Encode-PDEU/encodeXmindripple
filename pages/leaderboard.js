@@ -4,7 +4,6 @@ import NavBar from "../components/navbar"
 import axios from "axios"
 import { MoonLoader } from "react-spinners"
 import { Oswald, Roboto } from "next/font/google"
-import { useRouter } from "next/router"
 
 const oswald = Oswald({
   subsets: ["latin"],
