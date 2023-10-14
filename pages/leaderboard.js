@@ -4,6 +4,7 @@ import NavBar from "../components/navbar"
 import axios from "axios"
 import { MoonLoader } from "react-spinners"
 import { Oswald, Roboto } from "next/font/google"
+import next from "next"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ const roboto = Roboto({
   weight: ["400", "500", "700"],
 })
 
-const API_URL = "http://localhost:3000/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
 export default function Leaderboard_laptop() {
   const router = useRouter()

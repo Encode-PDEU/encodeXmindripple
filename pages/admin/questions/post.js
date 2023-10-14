@@ -25,7 +25,7 @@ const roboto = Roboto({
   weight: ["400", "500", "700"],
 })
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
 const Postquestion = () => {
   const router = useRouter()
