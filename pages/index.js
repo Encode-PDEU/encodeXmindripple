@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { useRouter } from "next/router" // Import the useRouter hook
 import { Oswald, Roboto } from "next/font/google"
 import Image from "next/image"
+import Head from "next/head"
 const oswald = Oswald({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -34,6 +35,16 @@ export default function App() {
     <div
       className={` ${roboto.className} flex h-screen flex-col justify-center items-center space-y-10 md:space-y-12`}
     >
+      <Head>
+        <title>MindRipple X Encode</title>
+        <meta
+          name="description"
+          content="
+          Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+        "
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="flex flex-row items-center flex-wrap gap-x-4 justify-center">
         <Image
           src="/Images/mindripple_logo.png"

@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { MoonLoader } from "react-spinners"
 import Image from "next/image"
+import Head from "next/head"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -79,6 +80,16 @@ const Login = () => {
       <div
         className={` ${roboto.className} flex lg:h-screen flex-col space-y-8 align-middle justify-center mt-8 lg:mt-0`}
       >
+        <Head>
+          <title>MindRipple X Encode | Login</title>
+          <meta
+            name="description"
+            content="
+            Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+          "
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <div className="flex flex-col lg:flex-row min-h-screen">
           <div className="lg:w-[45%]  px-6 pt-8 lg:pt-0">
             {/* Below div is only for mobile screens */}

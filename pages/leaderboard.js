@@ -5,6 +5,7 @@ import axios from "axios"
 import { MoonLoader } from "react-spinners"
 import { Oswald, Roboto } from "next/font/google"
 import next from "next"
+import Head from "next/head"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function Leaderboard_laptop() {
   const [leaderboardData, setLeaderboardData] = useState([])
   // const [topTen, setTopTen] = useState([])
   const [currentUserScore, setCurrentUserScore] = useState([])
+  console.log(currentUserScore)
   const [userEmail, setUserEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -70,6 +72,16 @@ export default function Leaderboard_laptop() {
   if (isLoading) {
     return (
       <div className={` ${roboto.className} bg-matrixBlack z-999`}>
+        <Head>
+          <title>MindRipple X Encode | Leaderboard </title>
+          <meta
+            name="description"
+            content="
+          Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+        "
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <div className="h-[80vh] w-full flex flex-col items-center justify-center">
           <MoonLoader color="#ffffff" size={70} />
@@ -84,6 +96,16 @@ export default function Leaderboard_laptop() {
   if (leaderboardData.length === 0) {
     return (
       <div className="pb-20">
+        <Head>
+          <title>MindRipple X Encode | Leaderboard </title>
+          <meta
+            name="description"
+            content="
+          Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+            "
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
 
         <h1
@@ -103,6 +125,17 @@ export default function Leaderboard_laptop() {
 
   return (
     <div className="pb-20">
+      <Head>
+        <title>MindRipple X Encode | Leaderboard </title>
+        <meta
+          name="description"
+          content="
+          Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+            "
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <NavBar />
       <h1
         className={`${oswald.className} font-semibold text-4xl md:text-6xl text-custom-yellow pl-4 md:pl-[40px] md:pt-[56px] md:pb-[25px] pt-4 pb-2`}
@@ -190,7 +223,7 @@ export default function Leaderboard_laptop() {
             </div>
 
             {/* Participant in sticky bar*/}
-            {currentUserScore[0].rank > 10 && (
+            {currentUserScore[0]?.rank > 10 && (
               <div className="fixed bottom-0 w-full px-2 md:px-10">
                 <div className="mb-4">
                   <div

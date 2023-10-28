@@ -10,6 +10,7 @@ import Confetti from "react-confetti"
 import CountdownTimer from "@/components/countdown"
 import { BiSolidChevronLeft, BiSolidChevronRight } from "react-icons/bi"
 import { useRouter } from "next/router"
+import Head from "next/head"
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -361,6 +362,16 @@ const Riddles = () => {
   if (riddlesData.length == 0) {
     return (
       <div className={` ${roboto.className} bg-matrixBlack z-999`}>
+        <Head>
+          <title>MindRipple X Encode | Riddles</title>
+          <meta
+            name="description"
+            content="
+            Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+          "
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <div className="h-[80vh] w-full flex flex-col items-center justify-center">
           <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4">
@@ -375,6 +386,16 @@ const Riddles = () => {
     <>
       {showConfetti && <Confetti />}
       <div className={` ${roboto.className}`}>
+        <Head>
+          <title>MindRipple X Encode | Riddles</title>
+          <meta
+            name="description"
+            content="
+            Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+          "
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavBar />
         <div className="flex flex-col md:flex-row justify-between px-6 m-auto md:mt-5 md:px-8">
           <p
