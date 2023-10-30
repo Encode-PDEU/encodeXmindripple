@@ -67,7 +67,11 @@ const Signup = () => {
     }
     // console.log(email == "mindripple@gmail.com")
 
-    if (email == "encode_pdeu@gmail.com" || email == "mindripple@gmail.com") {
+    if (
+      email == "encode_pdeu@gmail.com" ||
+      email == "mindripple@gmail.com" ||
+      email == "ayush.cict21@sot.pdpu.ac.in"
+    ) {
       setIsLoading(true)
       axios
         .post(`${API_URL}/admin/signup`, { email: email, password: password })
