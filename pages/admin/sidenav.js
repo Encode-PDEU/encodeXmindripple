@@ -39,6 +39,7 @@ const SideNav = () => {
         >
           All Questions
         </Link>
+
         <Link
           href="/admin/questions/post"
           className={`text-3xl font-normal w-[328px] h-[68px]  justify-center items-center flex flex-row ${
@@ -49,6 +50,18 @@ const SideNav = () => {
         >
           Post Question
         </Link>
+
+        <button
+          className="text-2xl font-normal w-[328px] h-[50px]  justify-center items-center flex
+          bg-red-500 rounded-md absolute bottom-10
+          flex-row"
+          onClick={() => {
+            localStorage.removeItem("admin_token")
+            router.push("/admin/login")
+          }}
+        >
+          Logout
+        </button>
       </div>
     </div>
   )

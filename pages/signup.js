@@ -75,7 +75,7 @@ const Signup = () => {
       })
       .catch((err) => {
         console.log(err)
-        toast.error("Signup failed. Try again.", {
+        toast.error(err.response.data.error, {
           position: "bottom-right",
         })
       })

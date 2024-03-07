@@ -68,6 +68,9 @@ const Login = () => {
             position: "top-center",
           })
           return
+        } else {
+          toast.error(err.message)
+          return
         }
       })
       .finally(() => {

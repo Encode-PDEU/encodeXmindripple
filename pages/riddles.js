@@ -120,7 +120,7 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/riddle/question`)
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         setRiddlesData(res.data)
 
         console.log("IMP")
@@ -374,8 +374,8 @@ const Riddles = () => {
         </Head>
         <NavBar />
         <div className="h-[80vh] w-full flex flex-col items-center justify-center">
-          <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4">
-            No riddles available. Please try again later.
+          <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4 text-center">
+            Competition will start from 15th March 2024. Stay tuned!
           </h1>
         </div>
       </div>
