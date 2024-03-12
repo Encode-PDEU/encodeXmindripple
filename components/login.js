@@ -23,7 +23,7 @@ const roboto = Roboto({
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
 const Login = (props) => {
-  console.log(props)
+  // console.log(props)
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 
@@ -53,7 +53,7 @@ const Login = (props) => {
 
   const handleLogin = (event) => {
     event.preventDefault()
-    console.log("clicked")
+    // console.log("clicked")
 
     if (email == "" || password == "") {
       toast.error("Please enter all the fields", {
@@ -66,7 +66,7 @@ const Login = (props) => {
     axios
       .post(`${API_URL}/user/login`, { email: email, password: password })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         localStorage.setItem("token", JSON.stringify(res.data))
         toast.success("Logged in Successfully!!", {
           position: "bottom-right",

@@ -233,7 +233,7 @@ const Signup = () => {
                 Password
               </label>
               <input
-                className="border rounded-lg w-full py-2 px-3 bg-transparent p-4 mb-5 mt-1 text-custom-grey
+                className="border rounded-lg w-full py-2 px-3 bg-transparent p-4 mb-2 mt-1 text-custom-grey
                 placeholder:text-custom-dark-grey border-custom-dark-grey
                 focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent
                 text-lg"
@@ -245,6 +245,9 @@ const Signup = () => {
                 onChange={handleChange}
                 required
               />
+              <span className="text-red-500 text-sm font-normal mb-2">
+                Password should be atleast 6 characters long
+              </span>
               <div className="flex flex-row items-center justify-between">
                 <div className="text-custom-grey text-lg">
                   <p>Already have an account?</p>

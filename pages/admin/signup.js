@@ -76,7 +76,7 @@ const Signup = () => {
       axios
         .post(`${API_URL}/admin/signup`, { email: email, password: password })
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
           localStorage.setItem("admin_token", JSON.stringify(res.data))
           toast.success("Signup  Successfull !!", {
             position: "bottom-right",

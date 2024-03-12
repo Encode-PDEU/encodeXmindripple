@@ -44,12 +44,12 @@ const Allquestions = () => {
       return
     }
 
-    console.log("Request fired")
+    // console.log("Request fired")
     setIsLoading(true)
     axios
       .get(`${API_URL}/admin/allQuestions`)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setQuestions(res.data)
       })
       .catch((error) => {

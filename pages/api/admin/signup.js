@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    console.log(req.body)
+    // console.log(req.body)
 
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(req.body.password, salt)

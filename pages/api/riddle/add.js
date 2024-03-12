@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabaseClient"
 
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    console.log(req.body)
+    // console.log(req.body)
 
     const { error } = await supabase.from("Riddle").insert({
       question: req.body.question,

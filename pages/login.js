@@ -32,7 +32,7 @@ const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault()
-    console.log("clicked")
+    // console.log("clicked")
 
     if (email == "" || password == "") {
       toast.error("Please enter all the fields", {
@@ -45,7 +45,7 @@ const Login = () => {
     axios
       .post(`${API_URL}/user/login`, { email: email, password: password })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         localStorage.setItem("token", JSON.stringify(res.data))
         toast.success("Logged in Successfully!!", {
           position: "bottom-right",

@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabaseClient"
 export default async function handler(req, res) {
   if (req.method == "GET") {
     const { user_id } = req.query
-    console.log(user_id)
+    // console.log(user_id)
 
     // Fetch score of the user
     const { data, error } = await supabase

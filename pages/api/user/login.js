@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabaseClient"
 
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    console.log(req.body)
+    // console.log(req.body)
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email: req.body.email,

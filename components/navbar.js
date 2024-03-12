@@ -92,17 +92,17 @@ const NavBar = () => {
                 </div>
               </Link>
 
-              {/* <Link href="/more">
+              <Link href="/participants">
                 <div
                   className={`link-style text-2xl ${
-                    router.pathname === "/more"
+                    router.pathname === "/participants"
                       ? "text-custom-green"
                       : "text-custom-yellow"
                   }`}
                 >
-                  More
+                  All Participants
                 </div>
-              </Link> */}
+              </Link>
             </div>
             <div
               className={`md:flex md:flex-row  md:items-center md:justify-center pb-30 ${
@@ -190,17 +190,17 @@ const NavBar = () => {
                 </div>
               </Link>
 
-              {/* <Link href="/more">
+              <Link href="/participants">
                 <div
                   className={`link-style text-2xl ${
-                    router.pathname === "/more"
+                    router.pathname === "/participants"
                       ? "text-custom-green"
                       : "text-custom-yellow hover:text-custom-green"
                   }`}
                 >
-                  More
+                  All Participants
                 </div>
-              </Link> */}
+              </Link>
             </div>
             <div
               className={`md:flex md:flex-row flex flex-row md:pl-8 ${

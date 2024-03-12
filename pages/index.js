@@ -3,6 +3,8 @@ import { useRouter } from "next/router" // Import the useRouter hook
 import { Oswald, Roboto } from "next/font/google"
 import Image from "next/image"
 import Head from "next/head"
+import { RiArrowRightLine } from "react-icons/ri"
+
 const oswald = Oswald({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -16,21 +18,32 @@ const roboto = Roboto({
 export default function App() {
   const router = useRouter() // Initialize the useRouter hook
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token")
+
+  //   // Delay for 3 seconds before redirecting to the login page
+  //   const timer = setTimeout(() => {
+  //     if (token) {
+  //       router.replace("/riddles")
+  //     } else {
+  //       router.replace("/login")
+  //     }
+  //   }, 3000)
+
+  //   // Clear the timer if the component unmounts or changes before the delay is over
+  //   return () => clearTimeout(timer)
+  // }, [])
+
+  const handleNavigate = () => {
     const token = localStorage.getItem("token")
 
-    // Delay for 3 seconds before redirecting to the login page
-    const timer = setTimeout(() => {
-      if (token) {
-        router.replace("/riddles")
-      } else {
-        router.replace("/login")
-      }
-    }, 3000)
+    if (token) {
+      router.replace("/riddles")
+    } else {
+      router.replace("/login")
+    }
+  }
 
-    // Clear the timer if the component unmounts or changes before the delay is over
-    return () => clearTimeout(timer)
-  }, [])
   return (
     <div
       className={` ${roboto.className} flex h-screen flex-col justify-center items-center space-y-10 md:space-y-12`}
@@ -73,9 +86,18 @@ export default function App() {
         <p className="text-green-500 gap-x-2"> 1.0</p>
       </div>
       <div>
-        <p className="text-custom-grey font-semibold text-3xl sm:text-5xl mb-5 font-roboto">
+        <p className="text-custom-grey font-semibold text-3xl sm:text-5xl font-roboto">
           MindRipple X Encode
         </p>
+      </div>
+      <div>
+        <button
+          className="bg-custom-yellow text-black rounded-md px-6 pt-[6px] pb-2 text-2xl flex items-center gap-x-2 font-medium hover:bg-yellow-500 transition duration-300 ease-in-out group"
+          onClick={handleNavigate}
+        >
+          Begin Hunt
+          <RiArrowRightLine className="text-3xl group-hover:translate-x-1 transition duration-300 ease-in-out" />
+        </button>
       </div>
     </div>
   )

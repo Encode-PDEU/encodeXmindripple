@@ -86,7 +86,7 @@ const Postquestion = () => {
         added_by: admin?.email,
       })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         toast.success("Question posted successfully")
         setFormData({
           question: "",

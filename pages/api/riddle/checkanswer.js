@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabaseClient"
 
 export default async function handler(req, res) {
   if (req.method == "GET") {
-    console.log(req.query)
+    // console.log(req.query)
     req.query.riddle_id = parseInt(req.query.riddle_id)
     req.query.score = parseInt(req.query.score)
     // console.log(typeof req.query.riddle_id)
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
       })
     } else {
       console.log("Wrong answer")
-      // console.log(req.query.answer)
+      console.log(req.query.answer)
       return res.status(400).json({ message: "Wrong Answer. Please Try again" })
     }
   }

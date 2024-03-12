@@ -1,7 +1,7 @@
 import Countdown from "react-countdown"
 
 export default function CountdownTimer({ timeDifference }) {
-  console.log("timeDifference", timeDifference)
+  // console.log("timeDifference", timeDifference)
   return (
     <>
       {timeDifference == NaN ? (

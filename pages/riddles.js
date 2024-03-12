@@ -120,11 +120,11 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/riddle/question`)
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setRiddlesData(res.data)
 
-        console.log("IMP")
-        console.log(currentUserDetails)
+        // console.log("IMP")
+        // console.log(currentUserDetails)
       })
       .catch((err) => {
         console.log(err)
@@ -218,7 +218,7 @@ const Riddles = () => {
     }
 
     const next_riddle = riddlesData[activeRiddleIndex + 1]
-    console.log("Next riddle: ", next_riddle)
+    // console.log("Next riddle: ", next_riddle)
 
     const todays_date = new Date()
     todays_date.setHours(0, 0, 0, 0)
