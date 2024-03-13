@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       // Update the 'active' column in your Supabase table
       const { data, error: updateError } = await supabase
         .from("Riddle") // Replace with your actual table name
-        .update({ active: newActiveStatus })
+        .update({ active: newActiveStatus, updated_at: new Date() })
         .eq("riddle_id", id)
 
       if (updateError) {

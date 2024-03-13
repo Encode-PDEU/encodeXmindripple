@@ -7,7 +7,7 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { MoonLoader } from "react-spinners"
 import Confetti from "react-confetti"
-import CountdownTimer from "@/components/countdown"
+// import CountdownTimer from "@/components/countdown"
 import { BiSolidChevronLeft, BiSolidChevronRight } from "react-icons/bi"
 import { useRouter } from "next/router"
 import Head from "next/head"
@@ -24,7 +24,7 @@ const roboto = Roboto({
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api"
 
-const MemoizedCountdownTimer = React.memo(CountdownTimer)
+// const MemoizedCountdownTimer = React.memo(CountdownTimer)
 
 const Riddles = () => {
   const router = useRouter()
@@ -64,24 +64,38 @@ const Riddles = () => {
     // console.log(currentUserDetails)
     // console.log(riddlesData[activeRiddleIndex]?.riddle_id.toString())
 
+    // console.log(timeDifference)
+
+    // If user has not answered the current riddle then disable next button
     if (
       currentUserDetails?.solved_questions?.includes(
-        riddlesData[activeRiddleIndex]?.riddle_id.toString() && // need to convert to string because the solved_questions array contains string values
-          timeDifference == 0
+        riddlesData[activeRiddleIndex]?.riddle_id.toString()
       )
     ) {
-      // console.log("Current riddle is answered")
       setIsNextButtonDisabled(false)
     } else {
-      // console.log("Current riddle is not answered")
       setIsNextButtonDisabled(true)
     }
+
+    // if (
+    //   currentUserDetails?.solved_questions?.includes(
+    //     riddlesData[activeRiddleIndex]?.riddle_id.toString()
+    //   ) && // need to convert to string because the solved_questions array contains string values
+    //   timeDifference == 0
+    // ) {
+    //   // console.log("Current riddle is answered")
+    //   setIsNextButtonDisabled(false)
+    // } else {
+    //   // console.log("Current riddle is not answered")
+    //   setIsNextButtonDisabled(true)
+    // }
   }
 
   const [questionsAnswered, setQuestionsAnswered] = useState([])
   // console.log("Questions answered: ")
   // console.log(questionsAnswered)
 
+  // ! FETCHING DATA => WORKING FINE
   useEffect(() => {
     // console.log("Request fired")
 
@@ -108,6 +122,7 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/user/details?user_id=${user_id}`)
       .then((res) => {
+        // console.log("User details: ")
         // console.log(res.data)
         setCurrentUserDetails(res.data)
       })
@@ -120,11 +135,9 @@ const Riddles = () => {
     axios
       .get(`${API_URL}/riddle/question`)
       .then((res) => {
+        // console.log("Riddles data: ")
         // console.log(res.data)
         setRiddlesData(res.data)
-
-        // console.log("IMP")
-        // console.log(currentUserDetails)
       })
       .catch((err) => {
         console.log(err)
@@ -161,7 +174,7 @@ const Riddles = () => {
   const [availabeScore, setAvailableScore] = useState(10)
   // const [scoreDeduction, setScoreDeduction] = useState(0)
 
-  // Calculate score
+  // ! Calculate score => WORKING FINE
   const calculateScore = () => {
     const current_riddle = riddlesData[activeRiddleIndex]
     // console.log("Current riddle: ", current_riddle)
@@ -170,12 +183,11 @@ const Riddles = () => {
     const todays_date = new Date()
     todays_date.setHours(0, 0, 0, 0)
 
-    const riddle_date = new Date(current_riddle?.date)
+    const riddle_date = new Date(current_riddle?.updated_at)
     riddle_date.setHours(0, 0, 0, 0)
 
     // Time difference in milliseconds
     const time_difference = Math.abs(todays_date - riddle_date)
-    // console.log("Time difference: ", time_difference)
 
     // Convert time difference to days
     let time_difference_in_days = Math.floor(
@@ -572,9 +584,24 @@ const Riddles = () => {
           )}
         </div>
 
-        {timeDifference && (
+        {/* {activeRiddleIndex == riddlesData.length - 1 && (
+          <div className="flex justify-center items-center mt-5">
+            <p className="text-custom-grey text-xl">
+              You have reached the end of the riddles. Stay tuned for the next
+              riddles!
+            </p>
+          </div>
+        )} */}
+
+        {/* {timeDifference != 0 ? (
           <MemoizedCountdownTimer timeDifference={timeDifference} />
-        )}
+        ) : (
+          <div className="flex justify-center items-center mt-5">
+            <p className="text-custom-grey text-xl">
+              You can access the next riddle!
+            </p>
+          </div>
+        )} */}
       </div>
     </>
   )

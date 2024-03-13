@@ -48,7 +48,7 @@ const Postquestion = () => {
   const [formData, setFormData] = useState({
     question: "",
     answer: "",
-    date: new Date(),
+    // date: new Date(),
   })
 
   const handleFormData = (e) => {
@@ -60,12 +60,12 @@ const Postquestion = () => {
     })
   }
 
-  const handleDateChange = (newDate) => {
-    setFormData({
-      ...formData,
-      date: newDate,
-    })
-  }
+  // const handleDateChange = (newDate) => {
+  //   setFormData({
+  //     ...formData,
+  //     date: newDate,
+  //   })
+  // }
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -159,7 +159,7 @@ const Postquestion = () => {
               onChange={handleFormData}
               required
             />
-            <label className="font-normal text-custom-grey text-2xl">
+            {/* <label className="font-normal text-custom-grey text-2xl">
               Date
             </label>
             <DatePicker
@@ -172,7 +172,7 @@ const Postquestion = () => {
 
               focus:outline-none focus:ring-1 focus:ring-custom-green focus:border-transparent"
               required
-            />
+            /> */}
 
             <div className="flex justify-center mt-4">
               <button

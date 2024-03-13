@@ -23,13 +23,13 @@ export default function Leaderboard_laptop() {
   const router = useRouter()
 
   const [leaderboardData, setLeaderboardData] = useState([])
-  // const [topTen, setTopTen] = useState([])
+  const [topTen, setTopTen] = useState([])
   const [currentUserScore, setCurrentUserScore] = useState([])
   // console.log(currentUserScore)
   const [userEmail, setUserEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  const [isCompetionStarted, setIsCompetitionStarted] = useState(false)
+  // const [isCompetionStarted, setIsCompetitionStarted] = useState(false)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"))
@@ -40,15 +40,17 @@ export default function Leaderboard_laptop() {
       return
     }
 
-    const startDate = new Date("2024-03-15")
+    // const startDate = new Date("2024-03-15")
     // console.log(startDate)
 
-    const currentDate = new Date()
+    // const currentDate = new Date()
 
-    if (currentDate < startDate) {
-      setIsCompetitionStarted(false)
-      return
-    }
+    // if (currentDate < startDate) {
+    //   setIsCompetitionStarted(false)
+    //   return
+    // }
+
+    // setIsCompetitionStarted(true)
 
     const email = token.user.email
     // console.log(email)
@@ -81,29 +83,29 @@ export default function Leaderboard_laptop() {
       })
   }, [])
 
-  if (isCompetionStarted === false) {
-    return (
-      <div className={` ${roboto.className} bg-matrixBlack z-999`}>
-        <Head>
-          <title>MindRipple X Encode | Riddles</title>
-          <meta
-            name="description"
-            content="
-            Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
-          "
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <NavBar />
-        <div className="h-[80vh] w-full flex flex-col items-center justify-center">
-          <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4 text-center">
-            Leaderboard will be available after the competition starts. Stay
-            tuned!
-          </h1>
-        </div>
-      </div>
-    )
-  }
+  // if (isCompetionStarted === false) {
+  //   return (
+  //     <div className={` ${roboto.className} bg-matrixBlack z-999`}>
+  //       <Head>
+  //         <title>MindRipple X Encode | Riddles</title>
+  //         <meta
+  //           name="description"
+  //           content="
+  //           Encode x MindRipple Surf Quest 1.0 . Surf through the riddles and solve them to win exciting prizes.
+  //         "
+  //         />
+  //         <link rel="icon" href="/favicon.ico" />
+  //       </Head>
+  //       <NavBar />
+  //       <div className="h-[80vh] w-full flex flex-col items-center justify-center">
+  //         <h1 className="text-yellow-500 text-2xl md:text-4xl font-semibold ml-2 mt-4 text-center">
+  //           Leaderboard will be available after the competition starts. Stay
+  //           tuned!
+  //         </h1>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
   if (isLoading) {
     return (

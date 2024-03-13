@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
     const { data, error } = await supabase
       .from("Riddle")
-      .select("question, riddle_id, date")
+      .select("question, riddle_id, updated_at")
       .eq("active", true)
       .order("riddle_id", { ascending: true })
     //.eq('riddle_id', req.query.riddle_id)

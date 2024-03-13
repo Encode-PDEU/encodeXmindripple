@@ -7,8 +7,8 @@ export default async function handler(req, res) {
     const { error } = await supabase.from("Riddle").insert({
       question: req.body.question,
       answer: req.body.answer,
-      date: req.body.date,
       added_by: req.body.added_by,
+      updated_at: new Date(),
     })
     if (error) {
       console.log(error)
